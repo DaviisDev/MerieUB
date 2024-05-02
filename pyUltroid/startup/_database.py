@@ -1,4 +1,4 @@
-# Ultroid - UserBot
+# MerieUB - UserBot
 # Copyright (C) 2021-2023 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
@@ -154,7 +154,7 @@ class MongoDB(_BaseDatabase):
 # --------------------------------------------------------------------------------------------- #
 
 # Thanks to "Akash Pattnaik" / @BLUE-DEVIL1134
-# for SQL Implementation in Ultroid.
+# for SQL Implementation in MerieUB.
 #
 # Please use https://elephantsql.com/ !
 
@@ -169,7 +169,7 @@ class SqlDB(_BaseDatabase):
             self._connection.autocommit = True
             self._cursor = self._connection.cursor()
             self._cursor.execute(
-                "CREATE TABLE IF NOT EXISTS Ultroid (ultroidCli varchar(70))"
+                "CREATE TABLE IF NOT EXISTS MerieUB (ultroidCli varchar(70))"
             )
         except Exception as error:
             LOGS.exception(error)
@@ -200,7 +200,7 @@ class SqlDB(_BaseDatabase):
 
     def get(self, variable):
         try:
-            self._cursor.execute(f"SELECT {variable} FROM Ultroid")
+            self._cursor.execute(f"SELECT {variable} FROM MerieUB")
         except psycopg2.errors.UndefinedColumn:
             return None
         data = self._cursor.fetchall()
@@ -213,28 +213,28 @@ class SqlDB(_BaseDatabase):
 
     def set(self, key, value):
         try:
-            self._cursor.execute(f"ALTER TABLE Ultroid DROP COLUMN IF EXISTS {key}")
+            self._cursor.execute(f"ALTER TABLE MerieUB DROP COLUMN IF EXISTS {key}")
         except (psycopg2.errors.UndefinedColumn, psycopg2.errors.SyntaxError):
             pass
         except BaseException as er:
             LOGS.exception(er)
         self._cache.update({key: value})
-        self._cursor.execute(f"ALTER TABLE Ultroid ADD {key} TEXT")
-        self._cursor.execute(f"INSERT INTO Ultroid ({key}) values (%s)", (str(value),))
+        self._cursor.execute(f"ALTER TABLE MerieUB ADD {key} TEXT")
+        self._cursor.execute(f"INSERT INTO MerieUB ({key}) values (%s)", (str(value),))
         return True
 
     def delete(self, key):
         try:
-            self._cursor.execute(f"ALTER TABLE Ultroid DROP COLUMN {key}")
+            self._cursor.execute(f"ALTER TABLE MerieUB DROP COLUMN {key}")
         except psycopg2.errors.UndefinedColumn:
             return False
         return True
 
     def flushall(self):
         self._cache.clear()
-        self._cursor.execute("DROP TABLE Ultroid")
+        self._cursor.execute("DROP TABLE MerieUB")
         self._cursor.execute(
-            "CREATE TABLE IF NOT EXISTS Ultroid (ultroidCli varchar(70))"
+            "CREATE TABLE IF NOT EXISTS MerieUB (ultroidCli varchar(70))"
         )
         return True
 

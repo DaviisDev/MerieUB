@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Ultroid - UserBot
+# MerieUB - UserBot
 # Copyright (C) 2021-2023 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
@@ -80,10 +80,10 @@ def telethon_session():
 
     # logging in
     try:
-        with TelegramClient(StringSession(), API_ID, API_HASH) as ultroid:
+        with TelegramClient(StringSession(), API_ID, API_HASH) as MerieUB:
             print("Generating a string session for •ULTROID•")
             try:
-                ultroid.send_message(
+                MerieUB.send_message(
                     "me",
                     f"**ULTROID** `SESSION`:\n\n`{ultroid.session.save()}`\n\n**Do not share this anywhere!**",
                 )

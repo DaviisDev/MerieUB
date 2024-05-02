@@ -1,4 +1,4 @@
-# Ultroid - UserBot
+# MerieUB - UserBot
 # Copyright (C) 2021-2023 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
@@ -151,10 +151,10 @@ async def do_zip(event):
     xx = await event.eor(get_string("com_1"))
     if event.pattern_match.group(1).strip():
         await bash(
-            f"zip -r --password {event.pattern_match.group(1).strip()} ultroid.zip zip/*"
+            f"zip -r --password {event.pattern_match.group(1).strip()} MerieUB.zip zip/*"
         )
     else:
-        await bash("zip -r ultroid.zip zip/*")
+        await bash("zip -r MerieUB.zip zip/*")
     k = time.time()
     xxx = await uploader("ultroid.zip", "ultroid.zip", k, xx, get_string("com_6"))
     await event.client.send_file(

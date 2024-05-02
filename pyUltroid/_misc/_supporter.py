@@ -1,4 +1,4 @@
-# Ultroid - UserBot
+# MerieUB - UserBot
 # Copyright (C) 2021-2023 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
@@ -7,7 +7,7 @@
 #
 #   To Install Other USERBOTs plugin Support
 #
-#   ULTROID Don't Need This Stuffs
+#   MerieUB Don't Need This Stuffs
 #
 
 import inspect

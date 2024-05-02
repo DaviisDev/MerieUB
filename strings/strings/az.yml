@@ -152,7 +152,7 @@ bot_3: "Repo"
 bot_4: "Support"
 bot_5: "• `Restartlanır...`"
 alive_1: "**Merie UserBot aktivdir...**\n\n**{}**\n\n┏━━━━━━━━━━━━━━━━━━━━━\n┣ **Sahib** - `{}`\n┣ **Version** - `{}`\n┣ **Py-Ultroid** - `{}`\n┣ **İşləmə Vaxtı** - `{}`\n┣ **Python** - `{}`\n┣ **Telethon** - `{}`\n┣ **Branch** - `{}`\n┗━━━━━━━━━━━━━━━━━━━━━"
-log: "**Heroku** Ultroid Log.\n[Bura]({}) toxun!"
+log: "**Heroku** MerieUB Log.\n[Bura]({}) toxun!"
 ping: "**Pong !!** `{}ms`\n**İşləmə vaxtı** - `{}`"
 usage: "**⚙️ Dyno istifadə ⚙️**:\n\n-> **Dyno usage for** `{}`:\n  •  **{}h**  **{}m |** `[{}%]`\n-> **Dyno hours quota remaining this month**:\n  •  **{}h**  **{}m |** `[{}%]`\n\n**Total Disk Space**: `{}`\n**Used**: `{}`\n**Free**: `{}`\n\n**📊 Data Usage 📊**\n**Upload**: `{}`\n**Down**: `{}`\n\n**CPU**: `{}%`\n**RAM**: `{}%`\n**DISK**: `{}%`"
 usage_simple: "**Yaddaş istifadə**: `{}`\n**İstifadə olunmuş**: `{}`\n**Qalan*q*: `{}`\n\n**📊 İnternet trafiki📊**\n**Göndərmə**: `{}`\n**Yükləmə**: `{}`\n\n**CPU**: `{}%`\n**RAM**: `{}%`\n**DISK**: `{}%`"
@@ -178,7 +178,7 @@ bd_8: "`Silinir...`"
 bd_9: "Kanal onsuzda databasedən silinib. "
 
 # calculator
-calc_1: "• Ultroid hesablama •"
+calc_1: "• MerieUB hesablama •"
 calc_2: "Kalkulyatoru yenidən aç"
 
 # channel hacks
@@ -285,10 +285,10 @@ sf_14: "SuperFBan Completed.\nTotal Feds - {}.\nExcluded - {}.\n Affected {} fed
 sf_15: "Starting a Mass-UnFedBan..."
 sf_16: "SuperUnFBan Completed.\nTotal Feds - {}.\nExcluded - {}.\n Affected {} feds.\n#TB"
 sf_17: "`Give me someones id, or reply to somones message to check his/her fedstat.`"
-sf_18: "List of feds {} has been banned in.\n\nCollected using Ultroid."
+sf_18: "List of feds {} has been banned in.\n\nCollected using MerieUB."
 sf_19: "**Error**\n `Unblock` @MissRose_Bot `and try again!"
 sf_20: "`Extracting information...`"
-sf_21: "\n\nFedInfo Extracted by Ultroid"
+sf_21: "\n\nFedInfo Extracted by MerieUB"
 sf_22: "No user was designated."
 sf_23: "**Error**\n `Unblock` @MissRose_Bot `and try again!"
 

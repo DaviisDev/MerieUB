@@ -1,4 +1,4 @@
-# Ultroid - UserBot
+# MerieUB - UserBot
 # Copyright (C) 2021-2023 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
@@ -414,7 +414,7 @@ async def ultdestroy(event):
         return await event.eor(get_string("sts_2"))
     await event.client.download_media(ult, "ultroid.tgs")
     xx = await event.eor(get_string("com_1"))
-    await bash("lottie_convert.py ultroid.tgs json.json")
+    await bash("lottie_convert.py MerieUB.tgs json.json")
     with open("json.json") as json:
         jsn = json.read()
     jsn = (

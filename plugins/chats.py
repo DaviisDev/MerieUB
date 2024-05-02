@@ -1,4 +1,4 @@
-# Ultroid - UserBot
+# MerieUB - UserBot
 # Copyright (C) 2021-2023 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
@@ -76,7 +76,7 @@ async def _(e):
     if match:
         split = match.split(maxsplit=1)
         request = split[0] in ["r", "request"]
-        title = "Created by Ultroid"
+        title = "Created by MerieUB"
         if len(split) > 1:
             match = split[1]
             spli = match.split(maxsplit=1)

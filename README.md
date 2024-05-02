@@ -61,7 +61,7 @@ Get the [Necessary Variables](#Necessary-Variables) and then click the button be
 - Clone the repository:    
 `git clone https://github.com/TeamUltroid/Ultroid.git`
 - Go to the cloned folder:    
-`cd Ultroid`
+`cd MerieUB`
 - Create a virtual env:      
 `virtualenv -p /usr/bin/python3 venv`
 `. ./venv/bin/activate`
@@ -76,7 +76,7 @@ Get the [Necessary Variables](#Necessary-Variables) and then click the button be
   - For Termux users:
     `wget -O session.py https://git.io/JY9JI && python session.py`
   - For Windows Users:
-    `cd desktop ; wget https://git.io/JY9JI -o ultroid.py ; python ultroid.py`
+    `cd desktop ; wget https://git.io/JY9JI -o MerieUB.py ; python MerieUB.py`
 - Fill your details in a `.env` file, as given in [`.env.sample`](https://github.com/TeamUltroid/Ultroid/blob/main/.env.sample).
 (You can either edit and rename the file or make a new file named `.env`.)
 - Run the bot:
@@ -102,7 +102,7 @@ One of the following database:
 Different ways to get your `SESSION`:
 * [![Run on Repl.it](https://replit.com/badge/github/TeamUltroid/Ultroid)](https://replit.com/@TeamUltroid/UltroidStringSession)
 * Linux : `wget -O session.py https://git.io/JY9JI && python3 session.py`
-* PowerShell : `cd desktop ; wget https://git.io/JY9JI ; python ultroid.py`
+* PowerShell : `cd desktop ; wget https://git.io/JY9JI ; python MerieUB.py`
 * Termux : `wget -O session.py https://git.io/JY9JI && python session.py`
 * TelegramBot : [@SessionGeneratorBot](https://t.me/SessionGeneratorBot)
 

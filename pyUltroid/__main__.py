@@ -1,4 +1,4 @@
-# Ultroid - UserBot
+# MerieUB - UserBot
 # Copyright (C) 2021-2023 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
@@ -68,14 +68,14 @@ def main():
 
     suc_msg = """
             ----------------------------------------------------------------------
-                Ultroid has been deployed! Visit @TheUltroid for updates!!
+                MerieUB has been deployed! Visit @TheUltroid for updates!!
             ----------------------------------------------------------------------
     """
 
     # for channel plugins
     plugin_channels = mdB.get_key("PLUGIN_CHANNEL")
 
-    # Customize Ultroid Assistant...
+    # Customize MerieUB Assistant...
     merie_bot.run_in_loop(customize())
 
     # Load Addons from Plugin Channels.

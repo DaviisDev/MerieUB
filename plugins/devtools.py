@@ -1,4 +1,4 @@
-# Ultroid - UserBot
+# MerieUB - UserBot
 # Copyright (C) 2021-2023 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
@@ -165,7 +165,7 @@ async def _(event):
 
 
 pp = pprint  # ignore: pylint
-bot = ultroid = merie_bot
+bot = MerieUB = merie_bot
 
 
 class u:

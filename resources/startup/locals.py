@@ -1,5 +1,5 @@
 # /usr/bin/python3
-# Ultroid - UserBot
+# MerieUB - UserBot
 # Copyright (C) 2021-2023 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
@@ -26,9 +26,9 @@ def start():
     check_for_py()
 
     print(f"{a}\n\n")
-    print("Welcome to Ultroid, lets start setting up!\n\n")
+    print("Welcome to MerieUB, lets start setting up!\n\n")
     print("Cloning the repository...\n\n")
-    os.system("rm -rf Ultroid")
+    os.system("rm -rf MerieUB")
     os.system("git clone https://github.com/TeamUltroid/Ultroid")
     print("\n\nDone")
     os.chdir("Ultroid")
@@ -57,7 +57,7 @@ def start():
         "REDIS_URI",
         "REDIS_PASSWORD",
     ]
-    all_done = "# Ultroid Environment Variables.\n# Do not delete this file.\n\n"
+    all_done = "# MerieUB Environment Variables.\n# Do not delete this file.\n\n"
     for i in varrs:
         all_done += do_input(i)
     clear_screen()
@@ -88,7 +88,7 @@ def start():
         print("Skipped!")
     clear_screen()
     print(a)
-    print("\nStarting Ultroid...")
+    print("\nStarting MerieUB...")
     os.system("sh startup")
 
 

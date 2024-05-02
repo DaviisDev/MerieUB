@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Ultroid - UserBot
+# MerieUB - UserBot
 # Copyright (C) 2021-2023 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
@@ -10,7 +10,7 @@ then
     echo "Current directory Identified.."
 else
     apt install git -y
-    git clone https://github.com/TeamUltroid/Ultroid
-    cd Ultroid
+    git clone https://github.com/BubbalooTeam/MerieUB
+    cd MerieUB
 fi
 bash resources/startup/termux.sh

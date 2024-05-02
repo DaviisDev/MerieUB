@@ -19,13 +19,13 @@ autopic_2: "Nessun risultato trovato per `{}`"
 autopic_3: "Hai una raccolta`{}` correlata alla tua ricerca! \nAvvio di Autopic!"
 
 # inline
-inline_1: "[Supporto Ultroid](t.me/UltroidSupportChat)\n\n
+inline_1: "[Supporto MerieUB](t.me/UltroidSupportChat)\n\n
 **Menù di aiuto di {}.\n\n
 Pʟᴜɢɪɴs ~ {}**"
-inline_2: "[Supporto Ultroid](t.me/UltroidSupportChat)\n\n
+inline_2: "[Supporto MerieUB](t.me/UltroidSupportChat)\n\n
 **Menù di aiuto di {}.\n\n
 Aᴅᴅᴏɴs ~ {}**"
-inline_3: "[Supporto Ultroid](t.me/UltroidSupportChat)\n\n
+inline_3: "[Supporto MerieUB](t.me/UltroidSupportChat)\n\n
 **Menù di aiuto di {}.\n\n
 Aᴅᴅᴏɴs ~ {}\n\n
 Vai e aggiungi la variabile ADDONS con valore true**"
@@ -67,7 +67,7 @@ alive_1: "**L'Merie UserBot...**\n\n
 ┣ **Telethon** - `{}`\n
 ┣ **Branch** - `{}`\n
 ┗━━━━━━━━━━━━━━━━━━━━━"
-log: "**Heroku** Logs di Ultroid.\nIncollati [qui]({})!"
+log: "**Heroku** Logs di MerieUB.\nIncollati [qui]({})!"
 ping: "**Pong !!** `{}ms`\n**Uptime** - `{}`"
 usage: "**⚙️ Utilizzo di Dyno ⚙️**:\n\n
  -> `Utilizzo di Dyno per`  **{}**:\n
@@ -145,10 +145,10 @@ sf_14: "SuperFBan completato.\nFederali totali - {}.\nEsclusi - {}.\n Colpiti {}
 sf_15: "Avvio di un Mass-UnFedBan..."
 sf_16: "SuperUnFBan Completato.\nFederali totali - {}.\nEsclusi - {}.\n Colpiti {} federali.\n#TB"
 sf_17: "`Dammi l'ID di qualcuno o rispondi al messaggio di qualcuno per controllare il suo fedstat.`"
-sf_18: "Elenco dei federali {} è stato bannato\n\nRaccolti utilizzando Ultroid."
+sf_18: "Elenco dei federali {} è stato bannato\n\nRaccolti utilizzando MerieUB."
 sf_19: "**Errore**\n `Sblocca` @MissRose_Bot `e riprova ancora!"
 sf_20: "`Estrazione di informazioni...`"
-sf_21: "\n\nFedInfo estratto da Ultroid"
+sf_21: "\n\nFedInfo estratto da MerieUB"
 
 # gdrive
 gdrive_1: "`Hai già autorizzato con Google Drive`"
@@ -235,7 +235,7 @@ vcbot_5: "`Ricointing di questa chat vocale."
 calc_1: "• Calcolatore in linea ultroide •"
 autopic_4: "L'autopico non era in uso !!"
 ascii_2: "`Convertirsi in html ...`"
-help_bot: "• `{i} Alive` |`{i} vivo inline`\n    Controlla se il tuo bot funziona.\n\n• `{i} ping`\n    Controlla i tempi di risposta di Ultroid.\n\n• `{i} update`\n    Vedi Changelogs se è disponibile un aggiornamento.\n\n• `{i} cmds`\n    Visualizza tutti i nomi dei plugin.\n\n• `{i} riavvio`\n    Per riavviare il tuo bot.\n\n• `{i} logs (sys)`\n    Ottieni i registri completi del terminale.\n• `{i} logs carbon`\n    Ottieni i registri dei sistemi carbonizzati.\n• `{i} logs Heroku`\n   Ottieni le ultime 100 righe di tronchi Heroku.\n\n• `{i} Shutdown`\n    Spegni il tuo bot."
+help_bot: "• `{i} Alive` |`{i} vivo inline`\n    Controlla se il tuo bot funziona.\n\n• `{i} ping`\n    Controlla i tempi di risposta di MerieUB.\n\n• `{i} update`\n    Vedi Changelogs se è disponibile un aggiornamento.\n\n• `{i} cmds`\n    Visualizza tutti i nomi dei plugin.\n\n• `{i} riavvio`\n    Per riavviare il tuo bot.\n\n• `{i} logs (sys)`\n    Ottieni i registri completi del terminale.\n• `{i} logs carbon`\n    Ottieni i registri dei sistemi carbonizzati.\n• `{i} logs Heroku`\n   Ottieni le ultime 100 righe di tronchi Heroku.\n\n• `{i} Shutdown`\n    Spegni il tuo bot."
 ascii_1: "`Rispondi all'immagine."
 sts_2: "`Rispondi a un adesivo animato ...`"
 ban_4: "{} ** è stato bandito da ** {} ** in ** `{}`"

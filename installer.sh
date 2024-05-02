@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-REPO="https://github.com/TeamUltroid/Ultroid.git"
+REPO="https://github.com/BubbalooTeam/MerieUB.git"
 CURRENT_DIR="$(pwd)"
 ENV_FILE_PATH=".env"
-DIR="/root/TeamUltroid"
+DIR="/root/BubbalooTeam"
 
 while [ $# -gt 0 ]; do
     case "$1" in
     --dir=*)
-        DIR="${1#*=}" || DIR="/root/TeamUltroid"
+        DIR="${1#*=}" || DIR="/root/BubbalooTeam"
         ;;
     --branch=*)
         BRANCH="${1#*=}" || BRANCH="main"
@@ -102,7 +102,7 @@ clone_repo() {
     cd $DIR
     if [ -d $DIR ]; then
         if [ -d $DIR/.git ]; then
-            echo -e "Updating Ultroid ${BRANCH}... "
+            echo -e "Updating MerieUB ${BRANCH}... "
             cd $DIR
             git pull
             currentbranch="$(git rev-parse --abbrev-ref HEAD)"
@@ -133,7 +133,7 @@ clone_repo() {
             export BRANCH="main"
         fi
         mkdir -p $DIR
-        echo -e "Cloning Ultroid ${BRANCH}... "
+        echo -e "Cloning MerieUB ${BRANCH}... "
         git clone -b $BRANCH $REPO $DIR
     fi
 }
@@ -189,7 +189,7 @@ dep_install() {
 }
 
 main() {
-    echo -e "Starting Ultroid Setup..."
+    echo -e "Starting MerieUB Setup..."
     if [ -d "pyUltroid" ] && [ -d "resources" ] && [ -d "plugins" ]; then
         DIR=$CURRENT_DIR
     fi

@@ -1,4 +1,4 @@
-# Ultroid - UserBot
+# MerieUB - UserBot
 # Copyright (C) 2021-2023 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
@@ -85,7 +85,7 @@ async def closet(lol):
 
 
 @asst_cmd(pattern="start( (.*)|$)", forwards=False, func=lambda x: not x.is_group)
-async def ultroid(event):
+async def MerieUB(event):
     args = event.pattern_match.group(1).strip()
     keym = KeyManager("BOT_USERS", cast=list)
     if not keym.contains(event.sender_id) and event.sender_id not in owner_and_sudos():
@@ -113,7 +113,7 @@ async def ultroid(event):
             if mdB.get_key("PMBOT"):
                 ok = "You can contact my master using this bot!!\n\nSend your Message, I will Deliver it To Master."
             await event.reply(
-                f"Hey there {mention}, this is Ultroid Assistant of {me}!\n\n{ok}",
+                f"Hey there {mention}, this is MerieUB Assistant of {me}!\n\n{ok}",
                 file=mdB.get_key("STARTMEDIA"),
                 buttons=[Button.inline("Info.", data="ownerinfo")]
                 if Owner_info_msg
@@ -150,7 +150,7 @@ async def ekekdhdb(e):
 
 
 @callback("mainmenu", owner=True, func=lambda x: not x.is_group)
-async def ultroid(event):
+async def MerieUB(event):
     await event.edit(
         get_string("ast_3").format(OWNER_NAME),
         buttons=_start,

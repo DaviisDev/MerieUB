@@ -1,4 +1,4 @@
-# Ultroid - UserBot
+# MerieUB - UserBot
 # Copyright (C) 2021-2023 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
@@ -840,7 +840,7 @@ async def in_pm_ans(event):
                 content=cont,
             )
         ]
-    await event.answer(res, switch_pm="• Ultroid •", switch_pm_param="start")
+    await event.answer(res, switch_pm="• MerieUB •", switch_pm_param="start")
 
 
 @callback(re.compile("admin_only(.*)"), from_users=[merie_bot.uid])
