@@ -25,13 +25,13 @@ from . import (
     in_pattern,
     inline_mention,
     merie_bot,
-    ultroid_cmd,
+    merie_cmd,
 )
 
 buddhhu = {}
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="wspr( (.*)|$)",
 )
 async def _(e):

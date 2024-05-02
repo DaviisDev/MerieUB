@@ -13,10 +13,10 @@ __doc__ = get_help("help_database")
 
 import re
 
-from . import Redis, eor, get_string, mdB, ultroid_cmd
+from . import Redis, eor, get_string, mdB, merie_cmd
 
 
-@ultroid_cmd(pattern="setdb( (.*)|$)", fullsudo=True)
+@merie_cmd(pattern="setdb( (.*)|$)", fullsudo=True)
 async def _(ult):
     match = ult.pattern_match.group(1).strip()
     if not match:
@@ -36,7 +36,7 @@ async def _(ult):
         await ult.eor(get_string("com_7"))
 
 
-@ultroid_cmd(pattern="deldb( (.*)|$)", fullsudo=True)
+@merie_cmd(pattern="deldb( (.*)|$)", fullsudo=True)
 async def _(ult):
     key = ult.pattern_match.group(1).strip()
     if not key:
@@ -56,7 +56,7 @@ async def _(ult):
         await ult.eor(get_string("com_7"))
 
 
-@ultroid_cmd(pattern="rendb( (.*)|$)", fullsudo=True)
+@merie_cmd(pattern="rendb( (.*)|$)", fullsudo=True)
 async def _(ult):
     match = ult.pattern_match.group(1).strip()
     if not match:

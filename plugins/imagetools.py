@@ -81,11 +81,11 @@ from . import (
     get_string,
     requests,
     mdB,
-    ultroid_cmd,
+    merie_cmd,
 )
 
 
-@ultroid_cmd(pattern="color$")
+@merie_cmd(pattern="color$")
 async def _(event):
     reply = await event.get_reply_message()
     if not (reply and reply.media):
@@ -115,7 +115,7 @@ async def _(event):
     await xx.delete()
 
 
-@ultroid_cmd(pattern="(grey|blur|negative|danger|mirror|quad|sketch|flip|toon)$")
+@merie_cmd(pattern="(grey|blur|negative|danger|mirror|quad|sketch|flip|toon)$")
 async def ult_tools(event):
     match = event.pattern_match.group(1)
     ureply = await event.get_reply_message()
@@ -186,7 +186,7 @@ async def ult_tools(event):
     os.remove(file)
 
 
-@ultroid_cmd(pattern="csample (.*)")
+@merie_cmd(pattern="csample (.*)")
 async def sampl(ult):
     if color := ult.pattern_match.group(1).strip():
         img = Image.new("RGB", (200, 100), f"{color}")
@@ -204,7 +204,7 @@ async def sampl(ult):
         await ult.eor("Wrong Color Name/Hex Code specified!")
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="blue$",
 )
 async def ultd(event):
@@ -240,7 +240,7 @@ async def ultd(event):
     os.remove(ultt)
 
 
-@ultroid_cmd(pattern="border( (.*)|$)")
+@merie_cmd(pattern="border( (.*)|$)")
 async def ok(event):
     hm = await event.get_reply_message()
     if not (hm and (hm.photo or hm.sticker)):
@@ -268,7 +268,7 @@ async def ok(event):
     await event.delete()
 
 
-@ultroid_cmd(pattern="pixelator( (.*)|$)")
+@merie_cmd(pattern="pixelator( (.*)|$)")
 async def pixelator(event):
     reply_message = await event.get_reply_message()
     if not (reply_message and (reply_message.photo or reply_message.sticker)):

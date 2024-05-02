@@ -13,7 +13,7 @@ from telethon import events
 
 from pyUltroid.dB.base import KeyManager
 
-from . import LOGS, asst, merie_bot, ultroid_cmd
+from . import LOGS, asst, merie_bot, merie_cmd
 
 Keym = KeyManager("DND_CHATS", cast=list)
 
@@ -32,7 +32,7 @@ async def dnd_func(event):
     await event.delete()
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="autokick (on|off)$",
     admins_only=True,
     manager=True,

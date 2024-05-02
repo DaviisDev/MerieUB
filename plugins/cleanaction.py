@@ -12,10 +12,10 @@ __doc__ = get_help("help_cleanaction")
 
 from telethon.utils import get_display_name
 
-from . import get_string, mdB, ultroid_cmd
+from . import get_string, mdB, merie_cmd
 
 
-@ultroid_cmd(pattern="addclean$", admins_only=True)
+@merie_cmd(pattern="addclean$", admins_only=True)
 async def _(e):
     key = mdB.get_key("CLEANCHAT") or []
     if e.chat_id in key:
@@ -25,7 +25,7 @@ async def _(e):
     await e.eor(get_string("clan_1"), time=5)
 
 
-@ultroid_cmd(pattern="remclean$")
+@merie_cmd(pattern="remclean$")
 async def _(e):
     key = mdB.get_key("CLEANCHAT") or []
     if e.chat_id in key:
@@ -34,7 +34,7 @@ async def _(e):
     await e.eor(get_string("clan_2"), time=5)
 
 
-@ultroid_cmd(pattern="listclean$")
+@merie_cmd(pattern="listclean$")
 async def _(e):
     if k := mdB.get_key("CLEANCHAT"):
         o = ""

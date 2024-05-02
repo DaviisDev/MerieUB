@@ -12,10 +12,10 @@
 """
 import os
 
-from . import bash, get_string, mediainfo, ultroid_cmd
+from . import bash, get_string, mediainfo, merie_cmd
 
 
-@ultroid_cmd(pattern="glitch$")
+@merie_cmd(pattern="glitch$")
 async def _(e):
     try:
         import glitch_me  # ignore :pylint

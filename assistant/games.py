@@ -35,7 +35,7 @@ from telethon.errors.rpcerrorlist import (
 from telethon.events import Raw
 from telethon.tl.types import InputMediaPoll, Poll, PollAnswer, UpdateMessagePollVote
 
-from pyUltroid._misc._decorators import ultroid_cmd
+from pyUltroid._misc._decorators import merie_cmd
 from pyUltroid.fns.helper import inline_mention
 from pyUltroid.fns.tools import async_searcher
 
@@ -47,7 +47,7 @@ games = {}
 aki_photo = "https://graph.org/file/3cc8825c029fd0cab9edc.jpg"
 
 
-@ultroid_cmd(pattern="akinator")
+@merie_cmd(pattern="akinator")
 async def akina(e):
     if not akinator:
         return

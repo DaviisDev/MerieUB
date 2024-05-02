@@ -42,7 +42,7 @@ from telethon.tl import functions
 fn = functions
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="sysinfo$",
 )
 async def _(e):
@@ -61,7 +61,7 @@ async def _(e):
     remove("neo.txt")
 
 
-@ultroid_cmd(pattern="bash", fullsudo=True, only_devs=True)
+@merie_cmd(pattern="bash", fullsudo=True, only_devs=True)
 async def _(event):
     carb, rayso, yamlf = None, None, False
     try:
@@ -196,7 +196,7 @@ def _parse_eval(value=None):
     return str(value)
 
 
-@ultroid_cmd(pattern="eval", fullsudo=True, only_devs=True)
+@merie_cmd(pattern="eval", fullsudo=True, only_devs=True)
 async def _(event):
     try:
         cmd = event.text.split(maxsplit=1)[1]
@@ -347,7 +347,7 @@ int main(){
 """
 
 
-@ultroid_cmd(pattern="cpp", only_devs=True)
+@merie_cmd(pattern="cpp", only_devs=True)
 async def doie(e):
     match = e.text.split(" ", maxsplit=1)
     try:

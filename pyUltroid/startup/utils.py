@@ -37,7 +37,7 @@ def load_addons(plugin_name):
     from .. import HNDLR, LOGS, asst, mdB, merie_bot
     from .._misc import _supporter as config
     from .._misc._assistant import asst_cmd, callback, in_pattern
-    from .._misc._decorators import ultroid_cmd
+    from .._misc._decorators import merie_cmd
     from .._misc._supporter import Config, admin_cmd, sudo_cmd
     from .._misc._wrappers import eod, eor
     from ..configs import Var
@@ -74,8 +74,8 @@ def load_addons(plugin_name):
     mod.eor = eor
     mod.edit_or_reply = eor
     mod.asst_cmd = asst_cmd
-    mod.ultroid_cmd = ultroid_cmd
-    mod.on_cmd = ultroid_cmd
+    mod.merie_cmd = merie_cmd
+    mod.on_cmd = merie_cmd
     mod.callback = callback
     mod.Redis = mdB.get_key
     mod.admin_cmd = admin_cmd

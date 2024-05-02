@@ -66,7 +66,7 @@ def compile_pattern(data, hndlr):
     return re.compile("\\" + hndlr + data)
 
 
-def ultroid_cmd(
+def merie_cmd(
     pattern=None, manager=False, merie_bot=merie_bot, asst=asst, **kwargs
 ):
     owner_only = kwargs.get("owner_only", False)

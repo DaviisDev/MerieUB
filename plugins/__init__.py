@@ -16,7 +16,7 @@ from telethon.tl import functions, types  # pylint:ignore
 
 from pyUltroid import *
 from pyUltroid._misc._assistant import asst_cmd, callback, in_pattern
-from pyUltroid._misc._decorators import ultroid_cmd
+from pyUltroid._misc._decorators import merie_cmd
 from pyUltroid._misc._wrappers import eod, eor
 from pyUltroid.dB import DEVLIST, ULTROID_IMAGES
 from pyUltroid.fns.helper import *
@@ -55,7 +55,7 @@ List = []
 Dict = {}
 InlinePlugin = {}
 N = 0
-cmd = ultroid_cmd
+cmd = merie_cmd
 STUFF = {}
 
 # Chats, which needs to be ignore for some cases

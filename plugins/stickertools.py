@@ -64,11 +64,11 @@ from . import (
     quotly,
     types,
     mdB,
-    ultroid_cmd,
+    merie_cmd,
 )
 
 
-@ultroid_cmd(pattern="packkang")
+@merie_cmd(pattern="packkang")
 async def pack_kangish(_):
     _e = await _.get_reply_message()
     local = None
@@ -144,7 +144,7 @@ async def pack_kangish(_):
     )
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="kang",
 )
 async def hehe(args):
@@ -368,7 +368,7 @@ async def hehe(args):
             pass
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="round$",
 )
 async def ultdround(event):
@@ -405,7 +405,7 @@ async def ultdround(event):
     os.remove("ult.webp")
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="destroy$",
 )
 async def ultdestroy(event):
@@ -445,7 +445,7 @@ async def ultdestroy(event):
     os.remove("json.json")
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="tiny$",
 )
 async def ultiny(event):

@@ -35,14 +35,14 @@ from . import (
     get_paste,
     get_string,
     mdB,
-    ultroid_cmd,
+    merie_cmd,
     uploader,
 )
 
 opn = []
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="thumbnail$",
 )
 async def _(e):
@@ -61,7 +61,7 @@ async def _(e):
     await e.eor(get_string("cvt_6").format(nn), link_preview=False)
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="rename( (.*)|$)",
 )
 async def imak(event):
@@ -116,7 +116,7 @@ conv_keys = {
 }
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="convert( (.*)|$)",
 )
 async def uconverter(event):
@@ -143,7 +143,7 @@ async def uconverter(event):
     await xx.delete()
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="doc( (.*)|$)",
 )
 async def _(event):
@@ -162,7 +162,7 @@ async def _(event):
     os.remove(input_str)
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="open( (.*)|$)",
 )
 async def _(event):

@@ -14,10 +14,10 @@ import os
 from pyUltroid.dB.filestore_db import del_stored, get_stored_msg, list_all_stored_msgs
 from pyUltroid.fns.tools import get_file_link
 
-from . import HNDLR, asst, get_string, in_pattern, mdB, merie_bot, ultroid_cmd
+from . import HNDLR, asst, get_string, in_pattern, mdB, merie_bot, merie_cmd
 
 
-@ultroid_cmd(pattern="store$")
+@merie_cmd(pattern="store$")
 async def filestoreplg(event):
     msg = await event.get_reply_message()
     if not msg:
@@ -31,7 +31,7 @@ async def filestoreplg(event):
     )
 
 
-@ultroid_cmd("delstored ?(.*)")
+@merie_cmd("delstored ?(.*)")
 async def _(event):
     match = event.pattern_match.group(1)
     if not match:
@@ -52,7 +52,7 @@ async def _(event):
     await event.eor("__Deleted__")
 
 
-@ultroid_cmd("liststored$")
+@merie_cmd("liststored$")
 async def liststored(event):
     files = list_all_stored_msgs()
     if not files:

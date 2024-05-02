@@ -17,10 +17,10 @@ from telethon.tl.functions.messages import EditChatDefaultBannedRightsRequest
 
 from pyUltroid.fns.admins import lock_unlock
 
-from . import ultroid_cmd
+from . import merie_cmd
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="(un|)lock( (.*)|$)", admins_only=True, manager=True, require="change_info"
 )
 async def un_lock(e):

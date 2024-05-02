@@ -27,7 +27,7 @@ from . import (
     mediainfo,
     mdB,
     merie_bot,
-    ultroid_cmd,
+    merie_cmd,
 )
 
 old_afk_msg = []
@@ -35,7 +35,7 @@ old_afk_msg = []
 is_approved = KeyManager("PMPERMIT", cast=list).contains
 
 
-@ultroid_cmd(pattern="afk( (.*)|$)", owner_only=True)
+@merie_cmd(pattern="afk( (.*)|$)", owner_only=True)
 async def set_afk(event):
     if event.client._bot or is_afk():
         return

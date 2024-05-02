@@ -29,7 +29,7 @@ from . import (
     get_string,
     is_url_ok,
     mediainfo,
-    ultroid_cmd,
+    merie_cmd,
 )
 
 try:
@@ -39,7 +39,7 @@ except ImportError:
     cv2 = None
 
 
-@ultroid_cmd(pattern="mediainfo( (.*)|$)")
+@merie_cmd(pattern="mediainfo( (.*)|$)")
 async def mi(e):
     r = await e.get_reply_message()
     match = e.pattern_match.group(1).strip()
@@ -109,7 +109,7 @@ async def mi(e):
         os.remove(naam)
 
 
-@ultroid_cmd(pattern="rotate( (.*)|$)")
+@merie_cmd(pattern="rotate( (.*)|$)")
 async def rotate_(ult):
     match = ult.pattern_match.group(1).strip()
     if not ult.is_reply:

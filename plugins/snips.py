@@ -28,11 +28,11 @@ from pyUltroid._misc import sudoers
 from pyUltroid.dB.snips_db import add_snip, get_snips, list_snip, rem_snip
 from pyUltroid.fns.tools import create_tl_btn, format_btn, get_msg_button
 
-from . import events, get_string, mediainfo, mdB, merie_bot, ultroid_cmd
+from . import events, get_string, mediainfo, mdB, merie_bot, merie_cmd
 from ._inline import something
 
 
-@ultroid_cmd(pattern="addsnip( (.*)|$)")
+@merie_cmd(pattern="addsnip( (.*)|$)")
 async def an(e):
     wrd = (e.pattern_match.group(1).strip()).lower()
     wt = await e.get_reply_message()
@@ -73,7 +73,7 @@ async def an(e):
     merie_bot.add_handler(add_snips, events.NewMessage())
 
 
-@ultroid_cmd(pattern="remsnip( (.*)|$)")
+@merie_cmd(pattern="remsnip( (.*)|$)")
 async def rs(e):
     wrd = (e.pattern_match.group(1).strip()).lower()
     if not wrd:
@@ -84,7 +84,7 @@ async def rs(e):
     await e.eor(f"Done : snip `${wrd}` Removed.")
 
 
-@ultroid_cmd(pattern="listsnip")
+@merie_cmd(pattern="listsnip")
 async def lsnote(e):
     if x := list_snip():
         sd = "SNIPS Found :\n\n"

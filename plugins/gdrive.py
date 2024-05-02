@@ -33,10 +33,10 @@ from telethon.tl.types import Message
 from pyUltroid.fns.gDrive import GDriveManager
 from pyUltroid.fns.helper import time_formatter
 
-from . import ULTConfig, asst, eod, eor, get_string, ultroid_cmd
+from . import ULTConfig, asst, eod, eor, get_string, merie_cmd
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="gdown( (.*)|$)",
     fullsudo=True,
 )
@@ -56,7 +56,7 @@ async def gdown(event):
     )
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="gdlist$",
     fullsudo=True,
 )
@@ -94,7 +94,7 @@ async def files(event):
         os.remove("drive-files.txt")
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="gdul( (.*)|$)",
     fullsudo=True,
 )
@@ -171,7 +171,7 @@ async def _(event):
         await mone.edit(f"Exception occurred while uploading to gDrive {e}")
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="gdsearch( (.*)|$)",
     fullsudo=True,
 )
@@ -215,7 +215,7 @@ async def _(event):
         os.remove(f"{input_str}.txt")
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="gdfolder$",
     fullsudo=True,
 )

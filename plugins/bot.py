@@ -58,7 +58,7 @@ from . import (
     start_time,
     time_formatter,
     mdB,
-    ultroid_cmd,
+    merie_cmd,
     ultroid_version,
     updater,
 )
@@ -93,7 +93,7 @@ async def alive(event):
     await event.answer(text, alert=True)
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="alive( (.*)|$)",
 )
 async def lol(ult):
@@ -180,7 +180,7 @@ async def lol(ult):
     )
 
 
-@ultroid_cmd(pattern="ping$", chats=[], type=["official", "assistant"])
+@merie_cmd(pattern="ping$", chats=[], type=["official", "assistant"])
 async def _(event):
     start = time.time()
     x = await event.eor("Pong !")
@@ -189,7 +189,7 @@ async def _(event):
     await x.edit(get_string("ping").format(end, uptime))
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="cmds$",
 )
 async def cmds(event):
@@ -199,7 +199,7 @@ async def cmds(event):
 heroku_api = Var.HEROKU_API
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="restart$",
     fullsudo=True,
 )
@@ -217,7 +217,7 @@ async def restartbt(ult):
         os.execl(sys.executable, sys.executable, "-m", "pyUltroid")
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="shutdown$",
     fullsudo=True,
 )
@@ -225,7 +225,7 @@ async def shutdownbot(ult):
     await shutdown(ult)
 
 
-@ultroid_cmd(
+@merie_cmd(
     pattern="logs( (.*)|$)",
     chats=[],
 )
@@ -308,7 +308,7 @@ async def inline_alive(ult):
     await ult.answer(result)
 
 
-@ultroid_cmd(pattern="update( (.*)|$)")
+@merie_cmd(pattern="update( (.*)|$)")
 async def _(e):
     xx = await e.eor(get_string("upd_1"))
     if e.pattern_match.group(1).strip() and (

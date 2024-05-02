@@ -16,12 +16,12 @@ from telethon.tl.functions.photos import UploadProfilePhotoRequest
 from pyUltroid.fns.helper import download_file
 from pyUltroid.fns.tools import get_google_images
 
-from . import LOGS, get_help, get_string, mdB, merie_bot, ultroid_cmd
+from . import LOGS, get_help, get_string, mdB, merie_bot, merie_cmd
 
 __doc__ = get_help("help_autopic")
 
 
-@ultroid_cmd(pattern="autopic( (.*)|$)")
+@merie_cmd(pattern="autopic( (.*)|$)")
 async def autopic(e):
     search = e.pattern_match.group(1).strip()
     if mdB.get_key("AUTOPIC") and not search:
