@@ -19,7 +19,7 @@ from telethon.utils import pack_bot_file_id
 from pyUltroid.dB.filter_db import add_filter, get_filter, list_filter, rem_filter
 from pyUltroid.fns.tools import create_tl_btn, format_btn, get_msg_button
 
-from . import events, get_string, mediainfo, udB, ultroid_bot, ultroid_cmd
+from . import events, get_string, mediainfo, mdB, merie_bot, ultroid_cmd
 from ._inline import something
 
 
@@ -59,7 +59,7 @@ async def af(e):
             txt, btn = get_msg_button(wt.text)
         add_filter(chat, wrd, txt, None, btn)
     await e.eor(get_string("flr_4").format(wrd))
-    ultroid_bot.add_handler(filter_func, events.NewMessage())
+    merie_bot.add_handler(filter_func, events.NewMessage())
 
 
 @ultroid_cmd(pattern="remfilter( (.*)|$)")
@@ -98,5 +98,5 @@ async def filter_func(e):
                     await e.reply(msg, file=media)
 
 
-if udB.get_key("FILTERS"):
-    ultroid_bot.add_handler(filter_func, events.NewMessage())
+if mdB.get_key("FILTERS"):
+    merie_bot.add_handler(filter_func, events.NewMessage())

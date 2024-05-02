@@ -17,7 +17,7 @@ from pyUltroid.dB.blacklist_db import (
     rem_blacklist,
 )
 
-from . import events, get_string, udB, ultroid_bot, ultroid_cmd
+from . import events, get_string, mdB, merie_bot, ultroid_cmd
 
 
 @ultroid_cmd(pattern="blacklist( (.*)|$)", admins_only=True)
@@ -30,7 +30,7 @@ async def af(e):
     heh = wrd.split(" ")
     for z in heh:
         add_blacklist(int(chat), z.lower())
-    ultroid_bot.add_handler(blacklist, events.NewMessage(incoming=True))
+    merie_bot.add_handler(blacklist, events.NewMessage(incoming=True))
     await e.eor(get_string("blk_2").format(wrd))
 
 
@@ -65,5 +65,5 @@ async def blacklist(e):
                 pass
 
 
-if udB.get_key("BLACKLIST_DB"):
-    ultroid_bot.add_handler(blacklist, events.NewMessage(incoming=True))
+if mdB.get_key("BLACKLIST_DB"):
+    merie_bot.add_handler(blacklist, events.NewMessage(incoming=True))

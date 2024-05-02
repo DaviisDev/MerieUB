@@ -16,7 +16,7 @@ from telethon.tl.functions.photos import UploadProfilePhotoRequest
 from pyUltroid.fns.helper import download_file
 from pyUltroid.fns.tools import get_google_images
 
-from . import LOGS, get_help, get_string, udB, ultroid_bot, ultroid_cmd
+from . import LOGS, get_help, get_string, mdB, merie_bot, ultroid_cmd
 
 __doc__ = get_help("help_autopic")
 
@@ -24,8 +24,8 @@ __doc__ = get_help("help_autopic")
 @ultroid_cmd(pattern="autopic( (.*)|$)")
 async def autopic(e):
     search = e.pattern_match.group(1).strip()
-    if udB.get_key("AUTOPIC") and not search:
-        udB.del_key("AUTOPIC")
+    if mdB.get_key("AUTOPIC") and not search:
+        mdB.del_key("AUTOPIC")
         return await e.eor(get_string("autopic_5"))
     if not search:
         return await e.eor(get_string("autopic_1"), time=5)
@@ -46,11 +46,11 @@ async def autopic(e):
     if not ok:
         return await e.eor(get_string("autopic_2").format(search), time=5)
     await e.eor(get_string("autopic_3").format(search))
-    udB.set_key("AUTOPIC", search)
-    SLEEP_TIME = udB.get_key("SLEEP_TIME") or 1221
+    mdB.set_key("AUTOPIC", search)
+    SLEEP_TIME = mdB.get_key("SLEEP_TIME") or 1221
     while True:
         for lie in ok:
-            if udB.get_key("AUTOPIC") != search:
+            if mdB.get_key("AUTOPIC") != search:
                 return
             file = await e.client.upload_file(lie)
             await e.client(UploadProfilePhotoRequest(file))
@@ -58,20 +58,20 @@ async def autopic(e):
         shuffle(ok)
 
 
-if search := udB.get_key("AUTOPIC"):
+if search := mdB.get_key("AUTOPIC"):
     images = {}
-    sleep = udB.get_key("SLEEP_TIME") or 1221
+    sleep = mdB.get_key("SLEEP_TIME") or 1221
 
     async def autopic_func():
-        search = udB.get_key("AUTOPIC")
+        search = mdB.get_key("AUTOPIC")
         if images.get(search) is None:
             images[search] = await get_google_images(search)
         if not images.get(search):
             return
         img = random.choice(images[search])
         filee = await download_file(img["original"], "resources/downloads/autopic.jpg")
-        file = await ultroid_bot.upload_file(filee)
-        await ultroid_bot(UploadProfilePhotoRequest(file))
+        file = await merie_bot.upload_file(filee)
+        await merie_bot(UploadProfilePhotoRequest(file))
         os.remove(filee)
 
     try:

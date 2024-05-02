@@ -61,7 +61,7 @@ except ImportError:
 
 
 async def randomchannel(
-    tochat, channel, range1, range2, caption=None, client=ultroid_bot
+    tochat, channel, range1, range2, caption=None, client=merie_bot
 ):
     do = randrange(range1, range2)
     async for x in client.iter_messages(channel, add_offset=do, limit=1):
@@ -164,7 +164,7 @@ async def allcmds(event, telegraph):
 async def ReTrieveFile(input_file_name):
     if not aiohttp:
         raise DependencyMissingError("This function needs 'aiohttp' to be installed.")
-    RMBG_API = udB.get_key("RMBG_API")
+    RMBG_API = mdB.get_key("RMBG_API")
     headers = {"X-API-Key": RMBG_API}
     files = {"image_file": open(input_file_name, "rb").read()}
     async with aiohttp.ClientSession() as ses:
@@ -392,9 +392,9 @@ class Quotly:
         """Create quotely's quote."""
         if not isinstance(event, list):
             event = [event]
-        from .. import udB
+        from .. import mdB
 
-        if udB.get_key("OQAPI"):
+        if mdB.get_key("OQAPI"):
             url = Quotly._API
         if not bg:
             bg = "#1b1429"

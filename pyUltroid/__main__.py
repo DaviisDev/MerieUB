@@ -32,37 +32,37 @@ def main():
 
     # Option to Auto Update On Restarts..
     if (
-        udB.get_key("UPDATE_ON_RESTART")
+        mdB.get_key("UPDATE_ON_RESTART")
         and os.path.exists(".git")
-        and ultroid_bot.run_in_loop(updater())
+        and merie_bot.run_in_loop(updater())
     ):
-        ultroid_bot.run_in_loop(bash("bash installer.sh"))
+        merie_bot.run_in_loop(bash("bash installer.sh"))
 
         os.execl(sys.executable, sys.executable, "-m", "pyUltroid")
 
-    ultroid_bot.run_in_loop(startup_stuff())
+    merie_bot.run_in_loop(startup_stuff())
 
-    ultroid_bot.me.phone = None
+    merie_bot.me.phone = None
 
-    if not ultroid_bot.me.bot:
-        udB.set_key("OWNER_ID", ultroid_bot.uid)
+    if not merie_bot.me.bot:
+        mdB.set_key("OWNER_ID", merie_bot.uid)
 
     LOGS.info("Initialising...")
 
-    ultroid_bot.run_in_loop(autopilot())
+    merie_bot.run_in_loop(autopilot())
 
-    pmbot = udB.get_key("PMBOT")
-    manager = udB.get_key("MANAGER")
-    addons = udB.get_key("ADDONS") or Var.ADDONS
-    vcbot = udB.get_key("VCBOT") or Var.VCBOT
+    pmbot = mdB.get_key("PMBOT")
+    manager = mdB.get_key("MANAGER")
+    addons = mdB.get_key("ADDONS") or Var.ADDONS
+    vcbot = mdB.get_key("VCBOT") or Var.VCBOT
     if HOSTED_ON == "okteto":
         vcbot = False
 
-    if (HOSTED_ON == "termux" or udB.get_key("LITE_DEPLOY")) and udB.get_key(
+    if (HOSTED_ON == "termux" or mdB.get_key("LITE_DEPLOY")) and mdB.get_key(
         "EXCLUDE_OFFICIAL"
     ) is None:
         _plugins = "autocorrect autopic audiotools compressor forcesubscribe fedutils gdrive glitch instagram nsfwfilter nightmode pdftools profanityfilter writer youtube"
-        udB.set_key("EXCLUDE_OFFICIAL", _plugins)
+        mdB.set_key("EXCLUDE_OFFICIAL", _plugins)
 
     load_other_plugins(addons=addons, pmbot=pmbot, manager=manager, vcbot=vcbot)
 
@@ -73,18 +73,18 @@ def main():
     """
 
     # for channel plugins
-    plugin_channels = udB.get_key("PLUGIN_CHANNEL")
+    plugin_channels = mdB.get_key("PLUGIN_CHANNEL")
 
     # Customize Ultroid Assistant...
-    ultroid_bot.run_in_loop(customize())
+    merie_bot.run_in_loop(customize())
 
     # Load Addons from Plugin Channels.
     if plugin_channels:
-        ultroid_bot.run_in_loop(plug(plugin_channels))
+        merie_bot.run_in_loop(plug(plugin_channels))
 
     # Send/Ignore Deploy Message..
-    if not udB.get_key("LOG_OFF"):
-        ultroid_bot.run_in_loop(ready())
+    if not mdB.get_key("LOG_OFF"):
+        merie_bot.run_in_loop(ready())
 
     # TODO: Announcement API IS DOWN
     # if AsyncIOScheduler:
@@ -93,7 +93,7 @@ def main():
     #     scheduler.start()
 
     # Edit Restarting Message (if It's restarting)
-    ultroid_bot.run_in_loop(WasItRestart(udB))
+    merie_bot.run_in_loop(WasItRestart(mdB))
 
     try:
         cleanup_cache()

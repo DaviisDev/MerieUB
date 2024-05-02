@@ -39,65 +39,65 @@ if run_as_module:
     _ult_cache = {}
     _ignore_eval = []
 
-    udB = UltroidDB()
+    mdB = UltroidDB()
     update_envs()
 
-    LOGS.info(f"Connecting to {udB.name}...")
-    if udB.ping():
-        LOGS.info(f"Connected to {udB.name} Successfully!")
+    LOGS.info(f"Connecting to {mdB.name}...")
+    if mdB.ping():
+        LOGS.info(f"Connected to {mdB.name} Successfully!")
 
-    BOT_MODE = udB.get_key("BOTMODE")
-    DUAL_MODE = udB.get_key("DUAL_MODE")
+    BOT_MODE = mdB.get_key("BOTMODE")
+    DUAL_MODE = mdB.get_key("DUAL_MODE")
 
-    USER_MODE = udB.get_key("USER_MODE")
+    USER_MODE = mdB.get_key("USER_MODE")
     if USER_MODE:
         DUAL_MODE = False
 
     if BOT_MODE:
         if DUAL_MODE:
-            udB.del_key("DUAL_MODE")
+            mdB.del_key("DUAL_MODE")
             DUAL_MODE = False
-        ultroid_bot = None
+        merie_bot = None
 
-        if not udB.get_key("BOT_TOKEN"):
+        if not mdB.get_key("BOT_TOKEN"):
             LOGS.critical(
                 '"BOT_TOKEN" not Found! Please add it, in order to use "BOTMODE"'
             )
 
             sys.exit()
     else:
-        ultroid_bot = UltroidClient(
+        merie_bot = UltroidClient(
             validate_session(Var.SESSION, LOGS),
-            udB=udB,
+            mdB=mdB,
             app_version=ultroid_version,
             device_model="Ultroid",
         )
-        ultroid_bot.run_in_loop(autobot())
+        merie_bot.run_in_loop(autobot())
 
     if USER_MODE:
-        asst = ultroid_bot
+        asst = merie_bot
     else:
-        asst = UltroidClient("asst", bot_token=udB.get_key("BOT_TOKEN"), udB=udB)
+        asst = UltroidClient("asst", bot_token=mdB.get_key("BOT_TOKEN"), mdB=mdB)
 
     if BOT_MODE:
-        ultroid_bot = asst
-        if udB.get_key("OWNER_ID"):
+        merie_bot = asst
+        if mdB.get_key("OWNER_ID"):
             try:
-                ultroid_bot.me = ultroid_bot.run_in_loop(
-                    ultroid_bot.get_entity(udB.get_key("OWNER_ID"))
+                merie_bot.me = merie_bot.run_in_loop(
+                    merie_bot.get_entity(mdB.get_key("OWNER_ID"))
                 )
             except Exception as er:
                 LOGS.exception(er)
     elif not asst.me.bot_inline_placeholder and asst._bot:
-        ultroid_bot.run_in_loop(enable_inline(ultroid_bot, asst.me.username))
+        merie_bot.run_in_loop(enable_inline(merie_bot, asst.me.username))
 
-    vcClient = vc_connection(udB, ultroid_bot)
+    vcClient = vc_connection(mdB, merie_bot)
 
-    _version_changes(udB)
+    _version_changes(mdB)
 
-    HNDLR = udB.get_key("HNDLR") or "."
-    DUAL_HNDLR = udB.get_key("DUAL_HNDLR") or "/"
-    SUDO_HNDLR = udB.get_key("SUDO_HNDLR") or HNDLR
+    HNDLR = mdB.get_key("HNDLR") or "."
+    DUAL_HNDLR = mdB.get_key("DUAL_HNDLR") or "/"
+    SUDO_HNDLR = mdB.get_key("SUDO_HNDLR") or HNDLR
 else:
     print("pyUltroid 2022 © TeamUltroid")
 
@@ -105,4 +105,4 @@ else:
 
     LOGS = getLogger("pyUltroid")
 
-    ultroid_bot = asst = udB = vcClient = None
+    merie_bot = asst = mdB = vcClient = None

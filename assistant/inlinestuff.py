@@ -169,10 +169,10 @@ async def _(e):
 async def repo(e):
     res = [
         await e.builder.article(
-            title="Ultroid Userbot",
+            title="Merie UserBot",
             description="Userbot | Telethon",
             thumb=wb(ultpic, 0, "image/jpeg", []),
-            text="• **ULTROID USERBOT** •",
+            text="• **Merie UserBot** •",
             buttons=SUP_BUTTONS,
         ),
     ]

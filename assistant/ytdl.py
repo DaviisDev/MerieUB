@@ -27,7 +27,7 @@ from pyUltroid.fns.helper import (
 )
 from pyUltroid.fns.ytdl import dler, get_buttons, get_formats
 
-from . import LOGS, asst, callback, in_pattern, udB
+from . import LOGS, asst, callback, in_pattern, mdB
 
 try:
     from youtubesearchpython import VideosSearch
@@ -288,7 +288,7 @@ async def _(event):
         )
     except (FilePartLengthInvalidError, MediaEmptyError):
         file = await asst.send_message(
-            udB.get_key("LOG_CHANNEL"),
+            mdB.get_key("LOG_CHANNEL"),
             text,
             file=file,
             buttons=button,

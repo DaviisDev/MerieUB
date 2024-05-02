@@ -34,7 +34,7 @@ def load_addons(plugin_name):
         return
     from pyUltroid import fns
 
-    from .. import HNDLR, LOGS, asst, udB, ultroid_bot
+    from .. import HNDLR, LOGS, asst, mdB, merie_bot
     from .._misc import _supporter as config
     from .._misc._assistant import asst_cmd, callback, in_pattern
     from .._misc._decorators import ultroid_cmd
@@ -49,18 +49,18 @@ def load_addons(plugin_name):
     for path in configPaths:
         modules[path] = config
     modules["pyUltroid.functions"] = fns
-    mod.LOG_CHANNEL = udB.get_key("LOG_CHANNEL")
-    mod.udB = udB
+    mod.LOG_CHANNEL = mdB.get_key("LOG_CHANNEL")
+    mod.mdB = mdB
     mod.asst = asst
     mod.tgbot = asst
-    mod.ultroid_bot = ultroid_bot
-    mod.ub = ultroid_bot
-    mod.bot = ultroid_bot
-    mod.ultroid = ultroid_bot
-    mod.borg = ultroid_bot
-    mod.telebot = ultroid_bot
-    mod.jarvis = ultroid_bot
-    mod.friday = ultroid_bot
+    mod.merie_bot = merie_bot
+    mod.ub = merie_bot
+    mod.bot = merie_bot
+    mod.ultroid = merie_bot
+    mod.borg = merie_bot
+    mod.telebot = merie_bot
+    mod.jarvis = merie_bot
+    mod.friday = merie_bot
     mod.eod = eod
     mod.edit_delete = eod
     mod.LOGS = LOGS
@@ -77,7 +77,7 @@ def load_addons(plugin_name):
     mod.ultroid_cmd = ultroid_cmd
     mod.on_cmd = ultroid_cmd
     mod.callback = callback
-    mod.Redis = udB.get_key
+    mod.Redis = mdB.get_key
     mod.admin_cmd = admin_cmd
     mod.sudo_cmd = sudo_cmd
     mod.HELP = HELP.get("Addons", {})

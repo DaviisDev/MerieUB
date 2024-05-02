@@ -11,7 +11,7 @@ try:
 except ModuleNotFoundError:
     from pyUltroid.fns.tools import safe_load
 
-ULTConfig.lang = udB.get_key("language") or os.getenv("LANGUAGE", "en")
+ULTConfig.lang = mdB.get_key("language") or os.getenv("LANGUAGE", "en")
 
 languages = {}
 PATH = "strings/strings/{}.yml"

@@ -15,7 +15,7 @@ from telethon.tl.custom import Button
 from pyUltroid.dB._core import HELP, LIST
 from pyUltroid.fns.tools import cmd_regex_replace
 
-from . import HNDLR, LOGS, OWNER_NAME, asst, get_string, inline_pic, udB, ultroid_cmd
+from . import HNDLR, LOGS, OWNER_NAME, asst, get_string, inline_pic, mdB, ultroid_cmd
 
 _main_help_menu = [
     [
@@ -114,7 +114,7 @@ async def _help(ult):
             for x in LIST.values():
                 z.extend(x)
             cmd = len(z) + 10
-            if udB.get_key("MANAGER") and udB.get_key("DUAL_HNDLR") == "/":
+            if mdB.get_key("MANAGER") and mdB.get_key("DUAL_HNDLR") == "/":
                 _main_help_menu[2:3] = [[Button.inline("• Manager Help •", "mngbtn")]]
             return await ult.reply(
                 get_string("inline_4").format(

@@ -101,11 +101,11 @@ def inline_mention(user, custom=None, html=False):
 
 
 def un_plug(shortname):
-    from .. import asst, ultroid_bot
+    from .. import asst, merie_bot
 
     try:
         all_func = LOADED[shortname]
-        for client in [ultroid_bot, asst]:
+        for client in [merie_bot, asst]:
             for x, _ in client.list_event_handlers():
                 if x in all_func:
                     client.remove_event_handler(x)
@@ -114,7 +114,7 @@ def un_plug(shortname):
         ADDONS.remove(shortname)
     except (ValueError, KeyError):
         name = f"addons.{shortname}"
-        for client in [ultroid_bot, asst]:
+        for client in [merie_bot, asst]:
             for i in reversed(range(len(client._event_builders))):
                 ev, cb = client._event_builders[i]
                 if cb.__module__ == name:

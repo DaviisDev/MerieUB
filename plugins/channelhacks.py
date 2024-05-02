@@ -17,7 +17,7 @@ from telethon.utils import get_display_name, get_peer_id
 
 from pyUltroid.dB.base import KeyManager
 
-from . import LOGS, asst, eor, events, get_string, udB, ultroid_bot, ultroid_cmd
+from . import LOGS, asst, eor, events, get_string, mdB, merie_bot, ultroid_cmd
 
 ERROR = {}
 SourceM = KeyManager("CH_SOURCE", cast=list)
@@ -25,7 +25,7 @@ DestiM = KeyManager("CH_DESTINATIONS", cast=list)
 
 
 async def autopost_func(e):
-    if not udB.get_key("AUTOPOST"):
+    if not mdB.get_key("AUTOPOST"):
         return
     x = SourceM.get()
     th = await e.get_chat()
@@ -41,7 +41,7 @@ async def autopost_func(e):
             except KeyError:
                 ERROR.update({str(ex): ex})
                 Error = f"**Error on AUTOPOST**\n\n`{ex}`"
-                await asst.send_message(udB.get_key("LOG_CHANNEL"), Error)
+                await asst.send_message(mdB.get_key("LOG_CHANNEL"), Error)
 
 
 @ultroid_cmd(pattern="shift (.*)")
@@ -85,7 +85,7 @@ async def source(e):
     if not SourceM.contains(y):
         SourceM.add(y)
         await e.eor(get_string("cha_2"))
-        ultroid_bot.add_handler(autopost_func, events.NewMessage())
+        merie_bot.add_handler(autopost_func, events.NewMessage())
     else:
         await e.eor(get_string("cha_3"))
 
@@ -96,7 +96,7 @@ async def dd(event):
     x = await event.eor(get_string("com_1"))
     if chat_id == "all":
         await x.edit(get_string("bd_8"))
-        udB.del_key("CH_SOURCE")
+        mdB.del_key("CH_SOURCE")
         await x.edit(get_string("cha_4"))
         return
     if chat_id:
@@ -168,7 +168,7 @@ async def dd(event):
     x = await event.eor(get_string("com_1"))
     if chat_id == "all":
         await x.edit(get_string("bd_8"))
-        udB.del_key("CH_DESTINATION")
+        mdB.del_key("CH_DESTINATION")
         await x.edit("Destinations database cleared.")
         return
     if chat_id:
@@ -188,7 +188,7 @@ async def dd(event):
 
 @ultroid_cmd(pattern="listdest")
 async def list_all(event):
-    ultroid_bot = event.client
+    merie_bot = event.client
     x = await event.eor(get_string("com_1"))
     channels = DestiM.get()
     num = len(channels)
@@ -198,7 +198,7 @@ async def list_all(event):
     for channel in channels:
         name = ""
         try:
-            name = get_display_name(await ultroid_bot.get_entity(int(channel)))
+            name = get_display_name(await merie_bot.get_entity(int(channel)))
         except BaseException:
             name = ""
         msg += f"\n=> **{name}** [`{channel}`]"
@@ -207,7 +207,7 @@ async def list_all(event):
         MSG = msg.replace("*", "").replace("`", "")
         with io.BytesIO(str.encode(MSG)) as out_file:
             out_file.name = "channels.txt"
-            await ultroid_bot.send_file(
+            await merie_bot.send_file(
                 event.chat_id,
                 out_file,
                 force_document=True,
@@ -220,5 +220,5 @@ async def list_all(event):
         await x.edit(msg)
 
 
-if udB.get_key("AUTOPOST"):
-    ultroid_bot.add_handler(autopost_func, events.NewMessage())
+if mdB.get_key("AUTOPOST"):
+    merie_bot.add_handler(autopost_func, events.NewMessage())

@@ -14,16 +14,16 @@ from telethon.errors import QueryIdInvalidError
 from telethon.events import CallbackQuery, InlineQuery, NewMessage
 from telethon.tl.types import InputWebDocument
 
-from .. import LOGS, asst, udB, ultroid_bot
+from .. import LOGS, asst, mdB, merie_bot
 from ..fns.admins import admin_check
 from . import append_or_update, owner_and_sudos
 
-OWNER = ultroid_bot.full_name
+OWNER = merie_bot.full_name
 
 MSG = f"""
 **Ultroid - UserBot**
 ➖➖➖➖➖➖➖➖➖➖
-**Owner**: [{OWNER}](tg://user?id={ultroid_bot.uid})
+**Owner**: [{OWNER}](tg://user?id={merie_bot.uid})
 **Support**: @TeamUltroid
 ➖➖➖➖➖➖➖➖➖➖
 """
@@ -70,7 +70,7 @@ def callback(data=None, from_users=[], admins=False, owner=False, **kwargs):
     """Assistant's callback decorator"""
     if "me" in from_users:
         from_users.remove("me")
-        from_users.append(ultroid_bot.uid)
+        from_users.append(merie_bot.uid)
 
     def ultr(func):
         async def wrapper(event):
@@ -98,7 +98,7 @@ def in_pattern(pattern=None, owner=False, **kwargs):
             if owner and event.sender_id not in owner_and_sudos():
                 res = [
                     await event.builder.article(
-                        title="Ultroid Userbot",
+                        title="Merie UserBot",
                         url="https://t.me/TeamUltroid",
                         description="(c) TeamUltroid",
                         text=MSG,
@@ -143,7 +143,7 @@ def in_pattern(pattern=None, owner=False, **kwargs):
                     LOGS.exception(err)
                 except Exception as er:
                     LOGS.exception(er)
-                    await asst.send_message(udB.get_key("LOG_CHANNEL"), error_text())
+                    await asst.send_message(mdB.get_key("LOG_CHANNEL"), error_text())
 
         asst.add_event_handler(wrapper, InlineQuery(pattern=pattern, **kwargs))
 

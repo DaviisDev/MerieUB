@@ -57,7 +57,7 @@ from . import (
     shutdown,
     start_time,
     time_formatter,
-    udB,
+    mdB,
     ultroid_cmd,
     ultroid_version,
     updater,
@@ -77,7 +77,7 @@ buttons = [
 
 # Will move to strings
 alive_txt = """
-The Ultroid Userbot
+The Merie UserBot
 
   ◍ Version - {}
   ◍ Py-Ultroid - {}
@@ -108,11 +108,11 @@ async def lol(ult):
         except BaseException as er:
             LOGS.exception(er)
         inline = True
-    pic = udB.get_key("ALIVE_PIC")
+    pic = mdB.get_key("ALIVE_PIC")
     if isinstance(pic, list):
         pic = choice(pic)
     uptime = time_formatter((time.time() - start_time) * 1000)
-    header = udB.get_key("ALIVE_TEXT") or get_string("bot_1")
+    header = mdB.get_key("ALIVE_TEXT") or get_string("bot_1")
     y = Repo().active_branch
     xx = Repo().remotes[0].config_reader.get("url")
     rep = xx.replace(".git", f"/tree/{y}")
@@ -129,7 +129,7 @@ async def lol(ult):
             kk,
         )
 
-        if _e := udB.get_key("ALIVE_EMOJI"):
+        if _e := mdB.get_key("ALIVE_EMOJI"):
             als = als.replace("🌀", _e)
     else:
         parse = "md"
@@ -144,7 +144,7 @@ async def lol(ult):
             kk,
         )
 
-        if a := udB.get_key("ALIVE_EMOJI"):
+        if a := mdB.get_key("ALIVE_EMOJI"):
             als = als.replace("✵", a)
     if pic:
         try:
@@ -207,7 +207,7 @@ async def restartbt(ult):
     ok = await ult.eor(get_string("bot_5"))
     call_back()
     who = "bot" if ult.client._bot else "user"
-    udB.set_key("_RESTART", f"{who}_{ult.chat_id}_{ok.id}")
+    mdB.set_key("_RESTART", f"{who}_{ult.chat_id}_{ok.id}")
     if heroku_api:
         return await restart(ok)
     await bash("git pull && pip3 install -r requirements.txt")
@@ -258,11 +258,11 @@ async def _(event):
 
 @in_pattern("alive", owner=True)
 async def inline_alive(ult):
-    pic = udB.get_key("ALIVE_PIC")
+    pic = mdB.get_key("ALIVE_PIC")
     if isinstance(pic, list):
         pic = choice(pic)
     uptime = time_formatter((time.time() - start_time) * 1000)
-    header = udB.get_key("ALIVE_TEXT") or get_string("bot_1")
+    header = mdB.get_key("ALIVE_TEXT") or get_string("bot_1")
     y = Repo().active_branch
     xx = Repo().remotes[0].config_reader.get("url")
     rep = xx.replace(".git", f"/tree/{y}")
@@ -271,7 +271,7 @@ async def inline_alive(ult):
         header, f"{ultroid_version} [{HOSTED_ON}]", UltVer, pyver(), uptime, kk
     )
 
-    if _e := udB.get_key("ALIVE_EMOJI"):
+    if _e := mdB.get_key("ALIVE_EMOJI"):
         als = als.replace("🌀", _e)
     builder = ult.builder
     if pic:
@@ -324,7 +324,7 @@ async def _(e):
     branch = (Repo.init()).active_branch
     if m:
         x = await asst.send_file(
-            udB.get_key("LOG_CHANNEL"),
+            mdB.get_key("LOG_CHANNEL"),
             ULTPIC(),
             caption="• **Update Available** •",
             force_document=False,
@@ -348,7 +348,7 @@ async def _(e):
 async def updava(event):
     await event.delete()
     await asst.send_file(
-        udB.get_key("LOG_CHANNEL"),
+        mdB.get_key("LOG_CHANNEL"),
         ULTPIC(),
         caption="• **Update Available** •",
         force_document=False,

@@ -30,7 +30,7 @@ from . import (
     inline_pic,
     split_list,
     start_time,
-    udB,
+    mdB,
 )
 from ._help import _main_help_menu
 
@@ -38,7 +38,7 @@ from ._help import _main_help_menu
 
 helps = get_string("inline_1")
 
-add_ons = udB.get_key("ADDONS")
+add_ons = mdB.get_key("ADDONS")
 
 zhelps = get_string("inline_3") if add_ons is False else get_string("inline_2")
 PLUGINS = HELP.get("Official", [])
@@ -61,7 +61,7 @@ SUP_BUTTONS = [
 @in_pattern(owner=True, func=lambda x: not x.text)
 async def inline_alive(o):
     TLINK = inline_pic() or "https://graph.org/file/74d6259983e0642923fdb.jpg"
-    MSG = "• **Ultroid Userbot •**"
+    MSG = "• **Merie UserBot •**"
     WEB0 = InputWebDocument(
         "https://graph.org/file/acd4f5d61369f74c5e7a7.jpg", 0, "image/jpg", []
     )
@@ -71,7 +71,7 @@ async def inline_alive(o):
             text=MSG,
             include_media=True,
             buttons=SUP_BUTTONS,
-            title="Ultroid Userbot",
+            title="Merie UserBot",
             description="Userbot | Telethon",
             url=TLINK,
             thumb=WEB0,
@@ -319,10 +319,10 @@ async def on_plug_in_callback_query_handler(event):
 
 
 def page_num(index, key):
-    rows = udB.get_key("HELP_ROWS") or 5
-    cols = udB.get_key("HELP_COLUMNS") or 2
+    rows = mdB.get_key("HELP_ROWS") or 5
+    cols = mdB.get_key("HELP_COLUMNS") or 2
     loaded = HELP.get(key, [])
-    emoji = udB.get_key("EMOJI_IN_HELP") or "✘"
+    emoji = mdB.get_key("EMOJI_IN_HELP") or "✘"
     List = [
         Button.inline(f"{emoji} {x} {emoji}", data=f"uplugin_{key}_{x}|{index}")
         for x in sorted(loaded)

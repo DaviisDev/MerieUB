@@ -25,11 +25,11 @@ try:
     from ProfanityDetector import detector
 except ImportError:
     detector = None
-from . import LOG_CHANNEL, LOGS, asst, get_string, types, udB, ultroid_bot
+from . import LOG_CHANNEL, LOGS, asst, get_string, types, mdB, merie_bot
 from ._inline import something
 
 
-@ultroid_bot.on(events.ChatAction())
+@merie_bot.on(events.ChatAction())
 async def Function(event):
     try:
         await DummyHandler(event)
@@ -39,7 +39,7 @@ async def Function(event):
 
 async def DummyHandler(ult):
     # clean chat actions
-    key = udB.get_key("CLEANCHAT") or []
+    key = mdB.get_key("CLEANCHAT") or []
     if ult.chat_id in key:
         try:
             await ult.delete()
@@ -55,7 +55,7 @@ async def DummyHandler(ult):
             await ult.respond(file=sticker)
     # force subscribe
     if (
-        udB.get_key("FORCESUB")
+        mdB.get_key("FORCESUB")
         and ((ult.user_joined or ult.user_added))
         and get_forcesetting(ult.chat_id)
     ):
@@ -63,12 +63,12 @@ async def DummyHandler(ult):
         if not user.bot:
             joinchat = get_forcesetting(ult.chat_id)
             try:
-                await ultroid_bot(GetParticipantRequest(int(joinchat), user.id))
+                await merie_bot(GetParticipantRequest(int(joinchat), user.id))
             except UserNotParticipantError:
-                await ultroid_bot.edit_permissions(
+                await merie_bot.edit_permissions(
                     ult.chat_id, user.id, send_messages=False
                 )
-                res = await ultroid_bot.inline_query(
+                res = await merie_bot.inline_query(
                     asst.me.username, f"fsub {user.id}_{joinchat}"
                 )
                 await res[0].click(ult.chat_id, reply_to=ult.action_message.id)
@@ -77,7 +77,7 @@ async def DummyHandler(ult):
         user = await ult.get_user()
         chat = await ult.get_chat()
         # gbans and @UltroidBans checks
-        if udB.get_key("ULTROID_BANS"):
+        if mdB.get_key("ULTROID_BANS"):
             try:
                 is_banned = await async_searcher(
                     "https://bans.ultroid.tech/api/status",
@@ -193,7 +193,7 @@ async def DummyHandler(ult):
             await ult.reply(file=med)
 
 
-@ultroid_bot.on(events.NewMessage(incoming=True))
+@merie_bot.on(events.NewMessage(incoming=True))
 async def chatBot_replies(e):
     sender = await e.get_sender()
     if not isinstance(sender, types.User) or sender.bot:
@@ -203,11 +203,11 @@ async def chatBot_replies(e):
             await e.respond(e.message)
         except Exception as er:
             LOGS.exception(er)
-    key = udB.get_key("CHATBOT_USERS") or {}
+    key = mdB.get_key("CHATBOT_USERS") or {}
     if e.text and key.get(e.chat_id) and sender.id in key[e.chat_id]:
         msg = await get_chatbot_reply(e.message.message)
         if msg:
-            sleep = udB.get_key("CHATBOT_SLEEP") or 1.5
+            sleep = mdB.get_key("CHATBOT_SLEEP") or 1.5
             await asyncio.sleep(sleep)
             await e.reply(msg)
     chat = await e.get_chat()
@@ -221,14 +221,14 @@ async def chatBot_replies(e):
             await e.delete()
 
 
-@ultroid_bot.on(events.Raw(types.UpdateUserName))
+@merie_bot.on(events.Raw(types.UpdateUserName))
 async def uname_change(e):
     await uname_stuff(e.user_id, e.usernames[0] if e.usernames else None, e.first_name)
 
 
 async def uname_stuff(id, uname, name):
-    if udB.get_key("USERNAME_LOG"):
-        old_ = udB.get_key("USERNAME_DB") or {}
+    if mdB.get_key("USERNAME_LOG"):
+        old_ = mdB.get_key("USERNAME_DB") or {}
         old = old_.get(id)
         # Ignore Name Logs
         if old and old == uname:
@@ -250,4 +250,4 @@ async def uname_stuff(id, uname, name):
             )
 
         old_[id] = uname
-        udB.set_key("USERNAME_DB", old_)
+        mdB.set_key("USERNAME_DB", old_)

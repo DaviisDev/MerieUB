@@ -20,9 +20,9 @@ class _SudoManager:
 
     def _init_db(self):
         if not self.db:
-            from .. import udB
+            from .. import mdB
 
-            self.db = udB
+            self.db = mdB
         return self.db
 
     def get_sudos(self):

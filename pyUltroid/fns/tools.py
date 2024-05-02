@@ -129,7 +129,7 @@ async def metadata(file):
         }
     if info.get("AudioCount"):
         data["title"] = info.get("Title", file)
-        data["performer"] = info.get("Performer") or udB.get_key("artist") or ""
+        data["performer"] = info.get("Performer") or mdB.get_key("artist") or ""
     if info.get("VideoCount"):
         data["height"] = int(float(_info[1].get("Height", 720)))
         data["width"] = int(float(_info[1].get("Width", 1280)))
@@ -542,19 +542,19 @@ def telegraph_client():
     if TELEGRAPH:
         return TELEGRAPH[0]
 
-    from .. import udB, ultroid_bot
+    from .. import mdB, merie_bot
 
-    token = udB.get_key("_TELEGRAPH_TOKEN")
-    TELEGRAPH_DOMAIN = udB.get_key("GRAPH_DOMAIN")
+    token = mdB.get_key("_TELEGRAPH_TOKEN")
+    TELEGRAPH_DOMAIN = mdB.get_key("GRAPH_DOMAIN")
     TelegraphClient = Telegraph(token, domain=TELEGRAPH_DOMAIN or "graph.org")
     if token:
         TELEGRAPH.append(TelegraphClient)
         return TelegraphClient
-    gd_name = ultroid_bot.full_name
+    gd_name = merie_bot.full_name
     short_name = gd_name[:30]
     profile_url = (
-        f"https://t.me/{ultroid_bot.me.username}"
-        if ultroid_bot.me.username
+        f"https://t.me/{merie_bot.me.username}"
+        if merie_bot.me.username
         else "https://t.me/TeamUltroid"
     )
     try:
@@ -569,7 +569,7 @@ def telegraph_client():
         else:
             LOGS.exception(er)
             return
-    udB.set_key("_TELEGRAPH_TOKEN", TelegraphClient.get_access_token())
+    mdB.set_key("_TELEGRAPH_TOKEN", TelegraphClient.get_access_token())
     TELEGRAPH.append(TelegraphClient)
     return TelegraphClient
 
@@ -616,9 +616,9 @@ async def Carbon(
 
 
 async def get_file_link(msg):
-    from .. import udB
+    from .. import mdB
 
-    msg_id = await msg.forward_to(udB.get_key("LOG_CHANNEL"))
+    msg_id = await msg.forward_to(mdB.get_key("LOG_CHANNEL"))
     await msg_id.reply(
         "**Message has been stored to generate a shareable link. Do not delete it.**"
     )
@@ -629,13 +629,13 @@ async def get_file_link(msg):
 
 
 async def get_stored_file(event, hash):
-    from .. import udB
+    from .. import mdB
 
     msg_id = get_stored_msg(hash)
     if not msg_id:
         return
     try:
-        msg = await asst.get_messages(udB.get_key("LOG_CHANNEL"), ids=msg_id)
+        msg = await asst.get_messages(mdB.get_key("LOG_CHANNEL"), ids=msg_id)
     except Exception as er:
         LOGS.warning(f"FileStore, Error: {er}")
         return

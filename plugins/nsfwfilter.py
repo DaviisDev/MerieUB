@@ -25,12 +25,12 @@ except ImportError:
     LOGS.error("nsfwfilter: 'Profanitydetector' not installed!")
 from pyUltroid.dB.nsfw_db import is_nsfw, nsfw_chat, rem_nsfw
 
-from . import HNDLR, async_searcher, eor, events, udB, ultroid_bot, ultroid_cmd
+from . import HNDLR, async_searcher, eor, events, mdB, merie_bot, ultroid_cmd
 
 
 @ultroid_cmd(pattern="addnsfw( (.*)|$)", admins_only=True)
 async def addnsfw(e):
-    if not udB.get_key("DEEP_API"):
+    if not mdB.get_key("DEEP_API"):
         return await eor(
             e, f"Get Api from deepai.org and Add It `{HNDLR}setdb DEEP_API your-api`"
         )
@@ -38,7 +38,7 @@ async def addnsfw(e):
     if not action or ("ban" or "kick" or "mute") not in action:
         action = "mute"
     nsfw_chat(e.chat_id, action)
-    ultroid_bot.add_handler(nsfw_check, events.NewMessage(incoming=True))
+    merie_bot.add_handler(nsfw_check, events.NewMessage(incoming=True))
     await e.eor("Added This Chat To Nsfw Filter")
 
 
@@ -54,7 +54,7 @@ NWARN = {}
 async def nsfw_check(e):
     chat = e.chat_id
     action = is_nsfw(chat)
-    if action and udB.get_key("DEEP_API") and e.media:
+    if action and mdB.get_key("DEEP_API") and e.media:
         pic, name, nsfw = "", "", 0
         try:
             pic = await e.download_media(thumb=-1)
@@ -74,7 +74,7 @@ async def nsfw_check(e):
                 },
                 post=True,
                 re_json=True,
-                headers={"api-key": udB.get_key("DEEP_API")},
+                headers={"api-key": mdB.get_key("DEEP_API")},
             )
             try:
                 k = float((r["output"]["nsfw_score"]))
@@ -92,58 +92,58 @@ async def nsfw_check(e):
                 count = NWARN[e.sender_id] + 1
                 if count < 3:
                     NWARN.update({e.sender_id: count})
-                    return await ultroid_bot.send_message(
+                    return await merie_bot.send_message(
                         chat,
                         f"**NSFW Warn {count}/3** To [{e.sender.first_name}](tg://user?id={e.sender_id})\nNSFW prohibited! Repeated violation would lead to {action}",
                     )
                 if "mute" in action:
                     try:
-                        await ultroid_bot.edit_permissions(
+                        await merie_bot.edit_permissions(
                             chat, e.sender_id, until_date=None, send_messages=False
                         )
-                        await ultroid_bot.send_message(
+                        await merie_bot.send_message(
                             chat,
                             f"NSFW Warn 3/3 to [{e.sender.first_name}](tg://user?id={e.sender_id})\n\n**Action Taken** : {action}",
                         )
                     except BaseException:
-                        await ultroid_bot.send_message(
+                        await merie_bot.send_message(
                             chat,
                             f"NSFW Warn 3/3 to [{e.sender.first_name}](tg://user?id={e.sender_id})\n\nUnable to {action}.",
                         )
                 elif "ban" in action:
                     try:
-                        await ultroid_bot.edit_permissions(
+                        await merie_bot.edit_permissions(
                             chat, e.sender_id, view_messages=False
                         )
-                        await ultroid_bot.send_message(
+                        await merie_bot.send_message(
                             chat,
                             f"NSFW Warn 3/3 to [{e.sender.first_name}](tg://user?id={e.sender_id})\n\n**Action Taken** : {action}",
                         )
                     except BaseException:
-                        await ultroid_bot.send_message(
+                        await merie_bot.send_message(
                             chat,
                             f"NSFW Warn 3/3 to [{e.sender.first_name}](tg://user?id={e.sender_id})\n\nUnable to {action}.",
                         )
                 elif "kick" in action:
                     try:
-                        await ultroid_bot.kick_participant(chat, e.sender_id)
-                        await ultroid_bot.send_message(
+                        await merie_bot.kick_participant(chat, e.sender_id)
+                        await merie_bot.send_message(
                             chat,
                             f"NSFW Warn 3/3 to [{e.sender.first_name}](tg://user?id={e.sender_id})\n\n**Action Taken** : {action}",
                         )
                     except BaseException:
-                        await ultroid_bot.send_message(
+                        await merie_bot.send_message(
                             chat,
                             f"NSFW Warn 3/3 to [{e.sender.first_name}](tg://user?id={e.sender_id})\n\nUnable to {action}.",
                         )
                 NWARN.pop(e.sender_id)
             else:
                 NWARN.update({e.sender_id: 1})
-                return await ultroid_bot.send_message(
+                return await merie_bot.send_message(
                     chat,
                     f"**NSFW Warn 1/3** To [{e.sender.first_name}](tg://user?id={e.sender_id})\nNSFW prohibited! Repeated violation would lead to {action}",
                 )
 
 
-if udB.get_key("NSFW"):
-    ultroid_bot.add_handler(nsfw_check, events.NewMessage(incoming=True))
+if mdB.get_key("NSFW"):
+    merie_bot.add_handler(nsfw_check, events.NewMessage(incoming=True))

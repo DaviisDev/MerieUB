@@ -26,22 +26,22 @@ from pyUltroid.startup._database import _BaseDatabase as Database
 from pyUltroid.version import __version__, ultroid_version
 from strings import get_help, get_string
 
-udB: Database
+mdB: Database
 
-Redis = udB.get_key
+Redis = mdB.get_key
 con = TgConverter
 quotly = Quotly()
-OWNER_NAME = ultroid_bot.full_name
-OWNER_ID = ultroid_bot.uid
+OWNER_NAME = merie_bot.full_name
+OWNER_ID = merie_bot.uid
 
-ultroid_bot: UltroidClient
+merie_bot: UltroidClient
 asst: UltroidClient
 
-LOG_CHANNEL = udB.get_key("LOG_CHANNEL")
+LOG_CHANNEL = mdB.get_key("LOG_CHANNEL")
 
 
 def inline_pic():
-    INLINE_PIC = udB.get_key("INLINE_PIC")
+    INLINE_PIC = mdB.get_key("INLINE_PIC")
     if INLINE_PIC is None:
         INLINE_PIC = choice(ULTROID_IMAGES)
     elif INLINE_PIC == False:

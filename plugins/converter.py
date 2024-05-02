@@ -34,7 +34,7 @@ from . import (
     downloader,
     get_paste,
     get_string,
-    udB,
+    mdB,
     ultroid_cmd,
     uploader,
 )
@@ -56,7 +56,7 @@ async def _(e):
     variable = uf(dl)
     os.remove(dl)
     nn = f"https://graph.org{variable[0]}"
-    udB.set_key("CUSTOM_THUMBNAIL", str(nn))
+    mdB.set_key("CUSTOM_THUMBNAIL", str(nn))
     await bash(f"wget {nn} -O resources/extras/ultroid.jpg")
     await e.eor(get_string("cvt_6").format(nn), link_preview=False)
 

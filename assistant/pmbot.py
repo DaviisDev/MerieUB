@@ -25,7 +25,7 @@ from pyUltroid.fns.helper import inline_mention
 from . import *
 
 botb = KeyManager("BOTBLS", cast=list)
-FSUB = udB.get_key("PMBOT_FSUB")
+FSUB = mdB.get_key("PMBOT_FSUB")
 CACHE = {}
 # --------------------------------------- Incoming -------------------------------------------- #
 

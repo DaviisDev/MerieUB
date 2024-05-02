@@ -12,7 +12,7 @@ __doc__ = get_help("help_chatbot")
 
 from pyUltroid.fns.tools import get_chatbot_reply
 
-from . import LOGS, eod, get_string, inline_mention, udB, ultroid_cmd
+from . import LOGS, eod, get_string, inline_mention, mdB, ultroid_cmd
 
 
 @ultroid_cmd(pattern="repai")
@@ -40,7 +40,7 @@ async def rem_chatBot(event):
 
 @ultroid_cmd(pattern="listai")
 async def lister(event):
-    key = udB.get_key("CHATBOT_USERS") or {}
+    key = mdB.get_key("CHATBOT_USERS") or {}
     users = key.get(event.chat_id, [])
     if not users:
         return await event.eor(get_string("chab_2"), time=5)
@@ -70,7 +70,7 @@ async def chat_bot_fn(event, type_):
             event,
             get_string("chab_1"),
         )
-    key = udB.get_key("CHATBOT_USERS") or {}
+    key = mdB.get_key("CHATBOT_USERS") or {}
     chat = event.chat_id
     user = user_.id
     if type_ == "add":
@@ -85,5 +85,5 @@ async def chat_bot_fn(event, type_):
                 key[chat].remove(user)
             if chat in key and not key[chat]:
                 del key[chat]
-    udB.set_key("CHATBOT_USERS", key)
+    mdB.set_key("CHATBOT_USERS", key)
     await event.eor(f"**ChatBot:**\n{type_}ed {inline_mention(user_)}")

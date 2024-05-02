@@ -84,7 +84,7 @@ MISC = """
 
 STRINGS = {"Admintools": ADMINTOOLS, "locks": LOCKS, "Utils": UTILITIES, "Misc": MISC}
 
-MNGE = udB.get_key("MNGR_EMOJI") or "•"
+MNGE = mdB.get_key("MNGR_EMOJI") or "•"
 
 
 def get_buttons():
@@ -110,7 +110,7 @@ async def helpish(event):
             "Contact me in PM for help!", buttons=Button.url("Click me for Help", url)
         )
     if str(event.sender_id) in owner_and_sudos() and (
-        udB.get_key("DUAL_MODE") and (udB.get_key("DUAL_HNDLR") == "/")
+        mdB.get_key("DUAL_MODE") and (mdB.get_key("DUAL_HNDLR") == "/")
     ):
         return
     await event.reply(START, buttons=get_buttons())

@@ -6,17 +6,17 @@
 # <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
 
 
-from .. import udB
+from .. import mdB
 
 
 def get_chats():
-    return udB.get_key("FORCESUB") or {}
+    return mdB.get_key("FORCESUB") or {}
 
 
 def add_forcesub(chat_id, chattojoin):
     omk = get_chats()
     omk.update({chat_id: chattojoin})
-    return udB.set_key("FORCESUB", omk)
+    return mdB.set_key("FORCESUB", omk)
 
 
 def get_forcesetting(chat_id):
@@ -30,6 +30,6 @@ def rem_forcesub(chat_id):
     if chat_id in omk.keys():
         try:
             del omk[chat_id]
-            return udB.set_key("FORCESUB", omk)
+            return mdB.set_key("FORCESUB", omk)
         except KeyError:
             return False

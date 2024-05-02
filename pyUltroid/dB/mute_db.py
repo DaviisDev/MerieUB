@@ -5,11 +5,11 @@
 # PLease read the GNU Affero General Public License in
 # <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
 
-from .. import udB
+from .. import mdB
 
 
 def get_muted():
-    return udB.get_key("MUTE") or {}
+    return mdB.get_key("MUTE") or {}
 
 
 def mute(chat, id):
@@ -19,14 +19,14 @@ def mute(chat, id):
             ok[chat].append(id)
     else:
         ok.update({chat: [id]})
-    return udB.set_key("MUTE", ok)
+    return mdB.set_key("MUTE", ok)
 
 
 def unmute(chat, id):
     ok = get_muted()
     if ok.get(chat) and id in ok[chat]:
         ok[chat].remove(id)
-    return udB.set_key("MUTE", ok)
+    return mdB.set_key("MUTE", ok)
 
 
 def is_muted(chat, id):

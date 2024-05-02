@@ -25,8 +25,8 @@ from . import (
     asst,
     get_string,
     mediainfo,
-    udB,
-    ultroid_bot,
+    mdB,
+    merie_bot,
     ultroid_cmd,
 )
 
@@ -56,8 +56,8 @@ async def set_afk(event):
                 media = reply.file.id
     await event.eor("`Done`", time=2)
     add_afk(text, media_type, media)
-    ultroid_bot.add_handler(remove_afk, events.NewMessage(outgoing=True))
-    ultroid_bot.add_handler(
+    merie_bot.add_handler(remove_afk, events.NewMessage(outgoing=True))
+    merie_bot.add_handler(
         on_afk,
         events.NewMessage(
             incoming=True, func=lambda e: bool(e.mentioned or e.is_private)
@@ -66,20 +66,20 @@ async def set_afk(event):
     msg1, msg2 = None, None
     if text and media:
         if "sticker" in media_type:
-            msg1 = await ultroid_bot.send_file(event.chat_id, file=media)
-            msg2 = await ultroid_bot.send_message(
+            msg1 = await merie_bot.send_file(event.chat_id, file=media)
+            msg2 = await merie_bot.send_message(
                 event.chat_id, get_string("afk_5").format(text)
             )
         else:
-            msg1 = await ultroid_bot.send_message(
+            msg1 = await merie_bot.send_message(
                 event.chat_id, get_string("afk_5").format(text), file=media
             )
     elif media:
         if "sticker" in media_type:
-            msg1 = await ultroid_bot.send_file(event.chat_id, file=media)
-            msg2 = await ultroid_bot.send_message(event.chat_id, get_string("afk_6"))
+            msg1 = await merie_bot.send_file(event.chat_id, file=media)
+            msg2 = await merie_bot.send_message(event.chat_id, get_string("afk_6"))
         else:
-            msg1 = await ultroid_bot.send_message(
+            msg1 = await merie_bot.send_message(
                 event.chat_id, get_string("afk_6"), file=media
             )
     elif text:
@@ -94,7 +94,7 @@ async def set_afk(event):
 
 
 async def remove_afk(event):
-    if event.is_private and udB.get_key("PMSETTING") and not is_approved(event.chat_id):
+    if event.is_private and mdB.get_key("PMSETTING") and not is_approved(event.chat_id):
         return
     elif "afk" in event.text.lower():
         return
@@ -156,9 +156,9 @@ async def on_afk(event):
         old_afk_msg.append(msg2)
 
 
-if udB.get_key("AFK_DB"):
-    ultroid_bot.add_handler(remove_afk, events.NewMessage(outgoing=True))
-    ultroid_bot.add_handler(
+if mdB.get_key("AFK_DB"):
+    merie_bot.add_handler(remove_afk, events.NewMessage(outgoing=True))
+    merie_bot.add_handler(
         on_afk,
         events.NewMessage(
             incoming=True, func=lambda e: bool(e.mentioned or e.is_private)

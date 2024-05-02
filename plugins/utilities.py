@@ -112,7 +112,7 @@ from . import (
     inline_mention,
     json_parser,
     mediainfo,
-    udB,
+    mdB,
     ultroid_cmd,
 )
 
@@ -419,7 +419,7 @@ async def _(ult):
     pattern="rmbg($| (.*))",
 )
 async def abs_rmbg(event):
-    RMBG_API = udB.get_key("RMBG_API")
+    RMBG_API = mdB.get_key("RMBG_API")
     if not RMBG_API:
         return await event.eor(
             "Get your API key from [here](https://www.remove.bg/) for this plugin to work.",

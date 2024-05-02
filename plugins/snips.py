@@ -28,7 +28,7 @@ from pyUltroid._misc import sudoers
 from pyUltroid.dB.snips_db import add_snip, get_snips, list_snip, rem_snip
 from pyUltroid.fns.tools import create_tl_btn, format_btn, get_msg_button
 
-from . import events, get_string, mediainfo, udB, ultroid_bot, ultroid_cmd
+from . import events, get_string, mediainfo, mdB, merie_bot, ultroid_cmd
 from ._inline import something
 
 
@@ -70,7 +70,7 @@ async def an(e):
             txt, btn = get_msg_button(wt.text)
         add_snip(wrd, txt, None, btn)
     await e.eor(f"Done : snip `${wrd}` Saved.")
-    ultroid_bot.add_handler(add_snips, events.NewMessage())
+    merie_bot.add_handler(add_snips, events.NewMessage())
 
 
 @ultroid_cmd(pattern="remsnip( (.*)|$)")
@@ -111,8 +111,8 @@ async def add_snips(e):
                 if k.get("button"):
                     btn = create_tl_btn(k["button"])
                     return await something(e, msg, media, btn, reply=None)
-                await ultroid_bot.send_message(e.chat_id, msg, file=media)
+                await merie_bot.send_message(e.chat_id, msg, file=media)
 
 
-if udB.get_key("SNIP"):
-    ultroid_bot.add_handler(add_snips, events.NewMessage())
+if mdB.get_key("SNIP"):
+    merie_bot.add_handler(add_snips, events.NewMessage())

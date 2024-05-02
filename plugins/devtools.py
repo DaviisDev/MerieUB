@@ -82,7 +82,7 @@ async def _(event):
     if stderr:
         err = f"**• ERROR:** \n`{stderr}`\n\n"
     if stdout:
-        if (carb or udB.get_key("CARBON_ON_BASH")) and (
+        if (carb or mdB.get_key("CARBON_ON_BASH")) and (
             event.is_private
             or event.chat.admin_rights
             or event.chat.creator
@@ -103,7 +103,7 @@ async def _(event):
             OUT = f"[\xad]({url}){OUT}"
             out = "**• OUTPUT:**"
             remove(li)
-        elif (rayso or udB.get_key("RAYSO_ON_BASH")) and (
+        elif (rayso or mdB.get_key("RAYSO_ON_BASH")) and (
             event.is_private
             or event.chat.admin_rights
             or event.chat.creator
@@ -165,7 +165,7 @@ async def _(event):
 
 
 pp = pprint  # ignore: pylint
-bot = ultroid = ultroid_bot
+bot = ultroid = merie_bot
 
 
 class u:
@@ -238,9 +238,9 @@ async def _(event):
             pass
     reply_to_id = event.reply_to_msg_id or event
     if any(item in cmd for item in KEEP_SAFE().All) and (
-        not (event.out or event.sender_id == ultroid_bot.uid)
+        not (event.out or event.sender_id == merie_bot.uid)
     ):
-        warning = await event.forward_to(udB.get_key("LOG_CHANNEL"))
+        warning = await event.forward_to(mdB.get_key("LOG_CHANNEL"))
         await warning.reply(
             f"Malicious Activities suspected by {inline_mention(await event.get_sender())}"
         )
@@ -281,7 +281,7 @@ async def _(event):
         if exc:
             msg = f"• <b>EVAL ERROR\n\n• CHAT:</b> <code>{get_display_name(event.chat)}</code> [<code>{event.chat_id}</code>]"
             msg += f"\n\n∆ <b>CODE:</b>\n<code>{cmd}</code>\n\n∆ <b>ERROR:</b>\n<code>{exc}</code>"
-            log_chat = udB.get_key("LOG_CHANNEL")
+            log_chat = mdB.get_key("LOG_CHANNEL")
             if len(msg) > 4000:
                 with BytesIO(msg.encode()) as out_file:
                     out_file.name = "Eval-Error.txt"

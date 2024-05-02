@@ -5,11 +5,11 @@
 # PLease read the GNU Affero General Public License in
 # <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
 
-from .. import udB
+from .. import mdB
 
 
 def get_stuff():
-    return udB.get_key("BLACKLIST_DB") or {}
+    return mdB.get_key("BLACKLIST_DB") or {}
 
 
 def add_blacklist(chat, word):
@@ -20,14 +20,14 @@ def add_blacklist(chat, word):
                 ok[chat].append(z)
     else:
         ok.update({chat: [word]})
-    return udB.set_key("BLACKLIST_DB", ok)
+    return mdB.set_key("BLACKLIST_DB", ok)
 
 
 def rem_blacklist(chat, word):
     ok = get_stuff()
     if ok.get(chat) and word in ok[chat]:
         ok[chat].remove(word)
-        return udB.set_key("BLACKLIST_DB", ok)
+        return mdB.set_key("BLACKLIST_DB", ok)
 
 
 def list_blacklist(chat):

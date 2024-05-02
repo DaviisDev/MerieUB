@@ -68,26 +68,26 @@ COUNT_PM = {}
 LASTMSG = {}
 WARN_MSGS = {}
 U_WARNS = {}
-if isinstance(udB.get_key("PMPERMIT"), (int, str)):
-    value = [udB.get_key("PMPERMIT")]
-    udB.set_key("PMPERMIT", value)
+if isinstance(mdB.get_key("PMPERMIT"), (int, str)):
+    value = [mdB.get_key("PMPERMIT")]
+    mdB.set_key("PMPERMIT", value)
 keym = KeyManager("PMPERMIT", cast=list)
 Logm = KeyManager("LOGUSERS", cast=list)
-PMPIC = udB.get_key("PMPIC")
-LOG_CHANNEL = udB.get_key("LOG_CHANNEL")
+PMPIC = mdB.get_key("PMPIC")
+LOG_CHANNEL = mdB.get_key("LOG_CHANNEL")
 UND = get_string("pmperm_1")
 UNS = get_string("pmperm_2")
 NO_REPLY = get_string("pmperm_3")
 
 UNAPPROVED_MSG = "**PMSecurity of {ON}!**\n\n{UND}\n\nYou have {warn}/{twarn} warnings!"
-if udB.get_key("PM_TEXT"):
+if mdB.get_key("PM_TEXT"):
     UNAPPROVED_MSG = (
         "**PMSecurity of {ON}!**\n\n"
-        + udB.get_key("PM_TEXT")
+        + mdB.get_key("PM_TEXT")
         + "\n\nYou have {warn}/{twarn} warnings!"
     )
 # 1
-WARNS = udB.get_key("PMWARNS") or 4
+WARNS = mdB.get_key("PMWARNS") or 4
 PMCMDS = [
     f"{HNDLR}a",
     f"{HNDLR}approve",
@@ -124,7 +124,7 @@ async def delete_pm_warn_msgs(chat: int):
 # =================================================================
 
 
-if udB.get_key("PMLOG"):
+if mdB.get_key("PMLOG"):
 
     @ultroid_cmd(
         pattern="logpm$",
@@ -150,7 +150,7 @@ if udB.get_key("PMLOG"):
         Logm.add(e.chat_id)
         return await e.eor("`Now I Won't log msgs from here.`", time=3)
 
-    @ultroid_bot.on(
+    @merie_bot.on(
         events.NewMessage(
             incoming=True,
             func=lambda e: e.is_private,
@@ -160,13 +160,13 @@ if udB.get_key("PMLOG"):
         user = await event.get_sender()
         if user.bot or user.is_self or user.verified or Logm.contains(user.id):
             return
-        await event.forward_to(udB.get_key("PMLOGGROUP") or LOG_CHANNEL)
+        await event.forward_to(mdB.get_key("PMLOGGROUP") or LOG_CHANNEL)
 
 
-if udB.get_key("PMSETTING"):
-    if udB.get_key("AUTOAPPROVE"):
+if mdB.get_key("PMSETTING"):
+    if mdB.get_key("AUTOAPPROVE"):
 
-        @ultroid_bot.on(
+        @merie_bot.on(
             events.NewMessage(
                 outgoing=True,
                 func=lambda e: e.is_private and e.out and not e.text.startswith(HNDLR),
@@ -181,7 +181,7 @@ if udB.get_key("PMSETTING"):
             keym.add(miss.id)
             await delete_pm_warn_msgs(miss.id)
             try:
-                await ultroid_bot.edit_folder(miss.id, folder=0)
+                await merie_bot.edit_folder(miss.id, folder=0)
             except BaseException:
                 pass
             try:
@@ -200,7 +200,7 @@ if udB.get_key("PMSETTING"):
             except MessageNotModifiedError:
                 pass
 
-    @ultroid_bot.on(
+    @merie_bot.on(
         events.NewMessage(
             incoming=True,
             func=lambda e: e.is_private
@@ -217,10 +217,10 @@ if udB.get_key("PMSETTING"):
         if not keym.contains(user.id) and event.text != UND:
             if Redis("MOVE_ARCHIVE"):
                 try:
-                    await ultroid_bot.edit_folder(user.id, folder=1)
+                    await merie_bot.edit_folder(user.id, folder=1)
                 except BaseException as er:
                     LOGS.info(er)
-            if event.media and not udB.get_key("DISABLE_PMDEL"):
+            if event.media and not mdB.get_key("DISABLE_PMDEL"):
                 await event.delete()
             name = user.first_name
             fullname = get_display_name(user)
@@ -230,7 +230,7 @@ if udB.get_key("PMSETTING"):
             try:
                 wrn = COUNT_PM[user.id] + 1
                 await asst.edit_message(
-                    udB.get_key("LOG_CHANNEL"),
+                    mdB.get_key("LOG_CHANNEL"),
                     _not_approved[user.id],
                     f"Incoming PM from **{mention}** [`{user.id}`] with **{wrn}/{WARNS}** warning!",
                     buttons=[
@@ -240,7 +240,7 @@ if udB.get_key("PMSETTING"):
                 )
             except KeyError:
                 _not_approved[user.id] = await asst.send_message(
-                    udB.get_key("LOG_CHANNEL"),
+                    mdB.get_key("LOG_CHANNEL"),
                     f"Incoming PM from **{mention}** [`{user.id}`] with **1/{WARNS}** warning!",
                     buttons=[
                         Button.inline("Approve PM", data=f"approve_{user.id}"),
@@ -269,7 +269,7 @@ if udB.get_key("PMSETTING"):
                     )
                     update_pm(user.id, message_, wrn)
                     if inline_pm:
-                        results = await ultroid_bot.inline_query(
+                        results = await merie_bot.inline_query(
                             my_bot, f"ip_{user.id}"
                         )
                         try:
@@ -279,13 +279,13 @@ if udB.get_key("PMSETTING"):
                         except Exception as e:
                             LOGS.info(str(e))
                     elif PMPIC:
-                        _to_delete[user.id] = await ultroid_bot.send_file(
+                        _to_delete[user.id] = await merie_bot.send_file(
                             user.id,
                             PMPIC,
                             caption=message_,
                         )
                     else:
-                        _to_delete[user.id] = await ultroid_bot.send_message(
+                        _to_delete[user.id] = await merie_bot.send_message(
                             user.id, message_
                         )
 
@@ -305,7 +305,7 @@ if udB.get_key("PMSETTING"):
                     update_pm(user.id, message_, wrn)
                     if inline_pm:
                         try:
-                            results = await ultroid_bot.inline_query(
+                            results = await merie_bot.inline_query(
                                 my_bot, f"ip_{user.id}"
                             )
                             _to_delete[user.id] = await results[0].click(
@@ -314,13 +314,13 @@ if udB.get_key("PMSETTING"):
                         except Exception as e:
                             LOGS.info(str(e))
                     elif PMPIC:
-                        _to_delete[user.id] = await ultroid_bot.send_file(
+                        _to_delete[user.id] = await merie_bot.send_file(
                             user.id,
                             PMPIC,
                             caption=message_,
                         )
                     else:
-                        _to_delete[user.id] = await ultroid_bot.send_message(
+                        _to_delete[user.id] = await merie_bot.send_message(
                             user.id, message_
                         )
                 LASTMSG.update({user.id: event.text})
@@ -340,7 +340,7 @@ if udB.get_key("PMSETTING"):
                 update_pm(user.id, message_, wrn)
                 if inline_pm:
                     try:
-                        results = await ultroid_bot.inline_query(
+                        results = await merie_bot.inline_query(
                             my_bot, f"ip_{user.id}"
                         )
                         _to_delete[user.id] = await results[0].click(
@@ -349,13 +349,13 @@ if udB.get_key("PMSETTING"):
                     except Exception as e:
                         LOGS.info(str(e))
                 elif PMPIC:
-                    _to_delete[user.id] = await ultroid_bot.send_file(
+                    _to_delete[user.id] = await merie_bot.send_file(
                         user.id,
                         PMPIC,
                         caption=message_,
                     )
                 else:
-                    _to_delete[user.id] = await ultroid_bot.send_message(
+                    _to_delete[user.id] = await merie_bot.send_message(
                         user.id, message_
                     )
             LASTMSG.update({user.id: event.text})
@@ -371,14 +371,14 @@ if udB.get_key("PMSETTING"):
                     del LASTMSG[user.id]
                 except KeyError:
                     await asst.send_message(
-                        udB.get_key("LOG_CHANNEL"),
+                        mdB.get_key("LOG_CHANNEL"),
                         "PMPermit is messed! Pls restart the bot!!",
                     )
                     return LOGS.info("COUNT_PM is messed.")
-                await ultroid_bot(BlockRequest(user.id))
-                await ultroid_bot(ReportSpamRequest(peer=user.id))
+                await merie_bot(BlockRequest(user.id))
+                await merie_bot(ReportSpamRequest(peer=user.id))
                 await asst.edit_message(
-                    udB.get_key("LOG_CHANNEL"),
+                    mdB.get_key("LOG_CHANNEL"),
                     _not_approved[user.id],
                     f"**{mention}** [`{user.id}`] was Blocked for spamming.",
                 )
@@ -387,10 +387,10 @@ if udB.get_key("PMSETTING"):
     async def _(e):
         x = e.pattern_match.group(1).strip()
         if x == "start":
-            udB.set_key("MOVE_ARCHIVE", "True")
+            mdB.set_key("MOVE_ARCHIVE", "True")
             await e.eor("Now I will move new Unapproved DM's to archive", time=5)
         elif x == "stop":
-            udB.set_key("MOVE_ARCHIVE", "False")
+            mdB.set_key("MOVE_ARCHIVE", "False")
             await e.eor("Now I won't move new Unapproved DM's to archive", time=5)
         elif x == "clear":
             try:
@@ -426,7 +426,7 @@ if udB.get_key("PMSETTING"):
             )
             try:
                 await asst.edit_message(
-                    udB.get_key("LOG_CHANNEL"),
+                    mdB.get_key("LOG_CHANNEL"),
                     _not_approved[user.id],
                     f"#APPROVED\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>was approved to PM you!</code>",
                     buttons=[
@@ -437,7 +437,7 @@ if udB.get_key("PMSETTING"):
                 )
             except KeyError:
                 _not_approved[user.id] = await asst.send_message(
-                    udB.get_key("LOG_CHANNEL"),
+                    mdB.get_key("LOG_CHANNEL"),
                     f"#APPROVED\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>was approved to PM you!</code>",
                     buttons=[
                         Button.inline("Disapprove PM", data=f"disapprove_{user.id}"),
@@ -472,7 +472,7 @@ if udB.get_key("PMSETTING"):
             )
             try:
                 await asst.edit_message(
-                    udB.get_key("LOG_CHANNEL"),
+                    mdB.get_key("LOG_CHANNEL"),
                     _not_approved[user.id],
                     f"#DISAPPROVED\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>was disapproved to PM you.</code>",
                     buttons=[
@@ -483,7 +483,7 @@ if udB.get_key("PMSETTING"):
                 )
             except KeyError:
                 _not_approved[user.id] = await asst.send_message(
-                    udB.get_key("LOG_CHANNEL"),
+                    mdB.get_key("LOG_CHANNEL"),
                     f"#DISAPPROVED\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>was disapproved to PM you.</code>",
                     buttons=[
                         Button.inline("Approve PM", data=f"approve_{user.id}"),
@@ -525,7 +525,7 @@ async def blockpm(block):
         pass
     try:
         await asst.edit_message(
-            udB.get_key("LOG_CHANNEL"),
+            mdB.get_key("LOG_CHANNEL"),
             _not_approved[user],
             f"#BLOCKED\n\n{inline_mention(aname)} [`{user}`] has been **blocked**.",
             buttons=[
@@ -534,7 +534,7 @@ async def blockpm(block):
         )
     except KeyError:
         _not_approved[user] = await asst.send_message(
-            udB.get_key("LOG_CHANNEL"),
+            mdB.get_key("LOG_CHANNEL"),
             f"#BLOCKED\n\n{inline_mention(aname)} [`{user}`] has been **blocked**.",
             buttons=[
                 Button.inline("UnBlock", data=f"unblock_{user}"),
@@ -587,7 +587,7 @@ async def unblockpm(event):
         return await event.eor(f"ERROR - {et}")
     try:
         await asst.edit_message(
-            udB.get_key("LOG_CHANNEL"),
+            mdB.get_key("LOG_CHANNEL"),
             _not_approved[user],
             f"#UNBLOCKED\n\n{inline_mention(aname)} [`{user}`] has been **unblocked**.",
             buttons=[
@@ -596,7 +596,7 @@ async def unblockpm(event):
         )
     except KeyError:
         _not_approved[user] = await asst.send_message(
-            udB.get_key("LOG_CHANNEL"),
+            mdB.get_key("LOG_CHANNEL"),
             f"#UNBLOCKED\n\n{inline_mention(aname)} [`{user}`] has been **unblocked**.",
             buttons=[
                 Button.inline("Block", data=f"block_{user}"),
@@ -615,7 +615,7 @@ async def list_approved(event):
     users = []
     for i in all:
         try:
-            name = get_display_name(await ultroid_bot.get_entity(i))
+            name = get_display_name(await merie_bot.get_entity(i))
         except BaseException:
             name = ""
         users.append([name.strip(), str(i)])
@@ -640,7 +640,7 @@ async def list_approved(event):
     re.compile(
         b"approve_(.*)",
     ),
-    from_users=[ultroid_bot.uid],
+    from_users=[merie_bot.uid],
 )
 async def apr_in(event):
     uid = int(event.data_match.group(1).decode("UTF-8"))
@@ -649,11 +649,11 @@ async def apr_in(event):
     if not keym.contains(uid):
         keym.add(uid)
         try:
-            await ultroid_bot.edit_folder(uid, folder=0)
+            await merie_bot.edit_folder(uid, folder=0)
         except BaseException:
             pass
         try:
-            user = await ultroid_bot.get_entity(uid)
+            user = await merie_bot.get_entity(uid)
         except BaseException:
             return await event.delete()
         await event.edit(
@@ -684,14 +684,14 @@ async def apr_in(event):
     re.compile(
         b"disapprove_(.*)",
     ),
-    from_users=[ultroid_bot.uid],
+    from_users=[merie_bot.uid],
 )
 async def disapr_in(event):
     uid = int(event.data_match.group(1).decode("UTF-8"))
     if keym.contains(uid):
         keym.remove(uid)
         try:
-            user = await ultroid_bot.get_entity(uid)
+            user = await merie_bot.get_entity(uid)
         except BaseException:
             return await event.delete()
         await event.edit(
@@ -721,16 +721,16 @@ async def disapr_in(event):
     re.compile(
         b"block_(.*)",
     ),
-    from_users=[ultroid_bot.uid],
+    from_users=[merie_bot.uid],
 )
 async def blck_in(event):
     uid = int(event.data_match.group(1).decode("UTF-8"))
     try:
-        await ultroid_bot(BlockRequest(uid))
+        await merie_bot(BlockRequest(uid))
     except BaseException:
         pass
     try:
-        user = await ultroid_bot.get_entity(uid)
+        user = await merie_bot.get_entity(uid)
     except BaseException:
         return await event.delete()
     await event.edit(
@@ -745,16 +745,16 @@ async def blck_in(event):
     re.compile(
         b"unblock_(.*)",
     ),
-    from_users=[ultroid_bot.uid],
+    from_users=[merie_bot.uid],
 )
 async def unblck_in(event):
     uid = int(event.data_match.group(1).decode("UTF-8"))
     try:
-        await ultroid_bot(UnblockRequest(uid))
+        await merie_bot(UnblockRequest(uid))
     except BaseException:
         pass
     try:
-        user = await ultroid_bot.get_entity(uid)
+        user = await merie_bot.get_entity(uid)
     except BaseException:
         return await event.delete()
     await event.edit(
@@ -771,7 +771,7 @@ async def ytfuxist(e):
         await e.answer("Deleted.")
         await e.delete()
     except BaseException:
-        await ultroid_bot.delete_messages(e.chat_id, e.id)
+        await merie_bot.delete_messages(e.chat_id, e.id)
 
 
 @in_pattern(re.compile("ip_(.*)"), owner=True)
@@ -843,7 +843,7 @@ async def in_pm_ans(event):
     await event.answer(res, switch_pm="• Ultroid •", switch_pm_param="start")
 
 
-@callback(re.compile("admin_only(.*)"), from_users=[ultroid_bot.uid])
+@callback(re.compile("admin_only(.*)"), from_users=[merie_bot.uid])
 async def _admin_tools(event):
     chat = int(event.pattern_match.group(1).strip())
     await event.edit(

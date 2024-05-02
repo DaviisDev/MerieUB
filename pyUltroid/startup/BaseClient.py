@@ -30,7 +30,7 @@ class UltroidClient(TelegramClient):
         api_id=None,
         api_hash=None,
         bot_token=None,
-        udB=None,
+        mdB=None,
         logger: Logger = LOGS,
         log_attempt=True,
         exit_on_error=True,
@@ -42,7 +42,7 @@ class UltroidClient(TelegramClient):
         self._handle_error = exit_on_error
         self._log_at = log_attempt
         self.logger = logger
-        self.udB = udB
+        self.mdB = mdB
         kwargs["api_id"] = api_id or Var.API_ID
         kwargs["api_hash"] = api_hash or Var.API_HASH
         kwargs["base_logger"] = TelethonLogger
@@ -78,7 +78,7 @@ class UltroidClient(TelegramClient):
         except (AccessTokenExpiredError, AccessTokenInvalidError):
             # AccessTokenError can only occur for Bot account
             # And at Early Process, Its saved in DB.
-            self.udB.del_key("BOT_TOKEN")
+            self.mdB.del_key("BOT_TOKEN")
             self.logger.critical(
                 "Bot token is expired or invalid. Create new from @Botfather and add in BOT_TOKEN env variable!"
             )

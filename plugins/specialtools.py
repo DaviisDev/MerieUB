@@ -52,7 +52,7 @@ from . import (
     get_string,
     mediainfo,
     quotly,
-    ultroid_bot,
+    merie_bot,
     ultroid_cmd,
     uploader,
 )
@@ -149,7 +149,7 @@ async def hbd(event):
         nam = await kk.get_sender()
         name = nam.first_name
     else:
-        name = ultroid_bot.me.first_name
+        name = merie_bot.me.first_name
     zn = pytz.timezone("Asia/Kolkata")
     abhi = dt.now(zn)
     kk = match.split("/")

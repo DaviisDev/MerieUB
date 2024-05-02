@@ -18,13 +18,13 @@ from pyUltroid.dB import DEVLIST
 from pyUltroid.dB.antiflood_db import get_flood, get_flood_limit, rem_flood, set_flood
 from pyUltroid.fns.admins import admin_check
 
-from . import Button, Redis, asst, callback, eod, get_string, ultroid_bot, ultroid_cmd
+from . import Button, Redis, asst, callback, eod, get_string, merie_bot, ultroid_cmd
 
 _check_flood = {}
 
 if Redis("ANTIFLOOD"):
 
-    @ultroid_bot.on(
+    @merie_bot.on(
         NewMsg(
             chats=list(get_flood().keys()),
         ),
@@ -74,9 +74,9 @@ async def unmuting(e):
     ino = (e.data_match.group(1)).decode("UTF-8").split("_")
     user = int(ino[0])
     chat = int(ino[1])
-    user_name = (await ultroid_bot.get_entity(user)).first_name
-    chat_title = (await ultroid_bot.get_entity(chat)).title
-    await ultroid_bot.edit_permissions(chat, user, send_messages=True)
+    user_name = (await merie_bot.get_entity(user)).first_name
+    chat_title = (await merie_bot.get_entity(chat)).title
+    await merie_bot.edit_permissions(chat, user, send_messages=True)
     await e.edit(
         f"#Antiflood\n\n`Unmuted `[{user_name}](tg://user?id={user})` in {chat_title}`"
     )

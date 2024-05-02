@@ -6,17 +6,17 @@
 # <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
 
 
-from .. import udB
+from .. import mdB
 
 
 def get_stuff():
-    return udB.get_key("BOTCHAT") or {}
+    return mdB.get_key("BOTCHAT") or {}
 
 
 def add_stuff(msg_id, user_id):
     ok = get_stuff()
     ok.update({msg_id: user_id})
-    return udB.set_key("BOTCHAT", ok)
+    return mdB.set_key("BOTCHAT", ok)
 
 
 def get_who(msg_id):
@@ -31,7 +31,7 @@ def tag_add(msg, chat, user):
         ok.update({"TAG": {msg: [chat, user]}})
     else:
         ok["TAG"].update({msg: [chat, user]})
-    return udB.set_key("BOTCHAT", ok)
+    return mdB.set_key("BOTCHAT", ok)
 
 
 def who_tag(msg):

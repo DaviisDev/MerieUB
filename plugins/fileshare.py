@@ -14,7 +14,7 @@ import os
 from pyUltroid.dB.filestore_db import del_stored, get_stored_msg, list_all_stored_msgs
 from pyUltroid.fns.tools import get_file_link
 
-from . import HNDLR, asst, get_string, in_pattern, udB, ultroid_bot, ultroid_cmd
+from . import HNDLR, asst, get_string, in_pattern, mdB, merie_bot, ultroid_cmd
 
 
 @ultroid_cmd(pattern="store$")
@@ -48,7 +48,7 @@ async def _(event):
             "`Message/Media of provided link was already deleted.`", time=5
         )
     del_stored(match[1])
-    await ultroid_bot.delete_messages(udB.get_key("LOG_CHANNEL"), int(msg_id))
+    await merie_bot.delete_messages(mdB.get_key("LOG_CHANNEL"), int(msg_id))
     await event.eor("__Deleted__")
 
 
@@ -74,7 +74,7 @@ async def file_short(event):
     all_ = list_all_stored_msgs()
     res = []
     if all_:
-        LOG_CHA = udB.get_key("LOG_CHANNEL")
+        LOG_CHA = mdB.get_key("LOG_CHANNEL")
         for msg in all_[:50]:
             m_id = get_stored_msg(msg)
             if not m_id:

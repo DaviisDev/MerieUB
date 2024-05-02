@@ -16,15 +16,15 @@ from pyUltroid.fns.helper import *
 from pyUltroid.fns.tools import get_stored_file
 from strings import get_languages, get_string
 
-OWNER_NAME = ultroid_bot.full_name
-OWNER_ID = ultroid_bot.uid
+OWNER_NAME = merie_bot.full_name
+OWNER_ID = merie_bot.uid
 
 AST_PLUGINS = {}
 
 
 async def setit(event, name, value):
     try:
-        udB.set_key(name, value)
+        mdB.set_key(name, value)
     except BaseException as er:
         LOGS.exception(er)
         return await event.edit("`Something Went Wrong`")

@@ -42,7 +42,7 @@ from telethon.tl.types import ChatBannedRights
 
 from pyUltroid.dB.base import KeyManager
 
-from . import get_string, udB, ultroid_bot, ultroid_cmd
+from . import get_string, mdB, merie_bot, ultroid_cmd
 
 keym = KeyManager("NIGHT_CHATS", cast=list)
 
@@ -56,7 +56,7 @@ async def set_time(e):
         if len(ok) != 4:
             return await e.eor(get_string("nightm_1"))
         tm = [int(x) for x in ok]
-        udB.set_key("NIGHT_TIME", str(tm))
+        mdB.set_key("NIGHT_TIME", str(tm))
         await e.eor(get_string("nightm_2"))
     except BaseException:
         await e.eor(get_string("nightm_1"))
@@ -66,7 +66,7 @@ async def set_time(e):
 async def add_grp(e):
     if pat := e.pattern_match.group(1).strip():
         try:
-            keym.add((await ultroid_bot.get_entity(pat)).id)
+            keym.add((await merie_bot.get_entity(pat)).id)
             return await e.eor(f"Done, Added {pat} To Night Mode.")
         except BaseException:
             return await e.eor(get_string("nightm_5"), time=5)
@@ -78,7 +78,7 @@ async def add_grp(e):
 async def r_em_grp(e):
     if pat := e.pattern_match.group(1).strip():
         try:
-            keym.remove((await ultroid_bot.get_entity(pat)).id)
+            keym.remove((await merie_bot.get_entity(pat)).id)
             return await e.eor(f"Done, Removed {pat} To Night Mode.")
         except BaseException:
             return await e.eor(get_string("nightm_5"), time=5)
@@ -92,7 +92,7 @@ async def rem_grp(e):
     name = "NightMode Groups Are-:\n\n"
     for x in chats:
         try:
-            ok = await ultroid_bot.get_entity(x)
+            ok = await merie_bot.get_entity(x)
             name += f"@{ok.username}" if ok.username else ok.title
         except BaseException:
             name += str(x)
@@ -102,7 +102,7 @@ async def rem_grp(e):
 async def open_grp():
     for chat in keym.get():
         try:
-            await ultroid_bot(
+            await merie_bot(
                 EditChatDefaultBannedRightsRequest(
                     chat,
                     banned_rights=ChatBannedRights(
@@ -117,18 +117,18 @@ async def open_grp():
                     ),
                 )
             )
-            await ultroid_bot.send_message(chat, "**NightMode Off**\n\nGroup Opened 🥳.")
+            await merie_bot.send_message(chat, "**NightMode Off**\n\nGroup Opened 🥳.")
         except Exception as er:
             LOGS.info(er)
 
 
 async def close_grp():
     __, _, h2, m2 = 0, 0, 7, 0
-    if udB.get_key("NIGHT_TIME"):
-        _, __, h2, m2 = eval(udB.get_key("NIGHT_TIME"))
+    if mdB.get_key("NIGHT_TIME"):
+        _, __, h2, m2 = eval(mdB.get_key("NIGHT_TIME"))
     for chat in keym.get():
         try:
-            await ultroid_bot(
+            await merie_bot(
                 EditChatDefaultBannedRightsRequest(
                     chat,
                     banned_rights=ChatBannedRights(
@@ -137,7 +137,7 @@ async def close_grp():
                     ),
                 )
             )
-            await ultroid_bot.send_message(
+            await merie_bot.send_message(
                 chat, f"**NightMode : Group Closed**\n\nGroup Will Open At `{h2}:{m2}`"
             )
         except Exception as er:
@@ -147,8 +147,8 @@ async def close_grp():
 if AsyncIOScheduler and keym.get():
     try:
         h1, m1, h2, m2 = 0, 0, 7, 0
-        if udB.get_key("NIGHT_TIME"):
-            h1, m1, h2, m2 = eval(udB.get_key("NIGHT_TIME"))
+        if mdB.get_key("NIGHT_TIME"):
+            h1, m1, h2, m2 = eval(mdB.get_key("NIGHT_TIME"))
         sch = AsyncIOScheduler()
         sch.add_job(close_grp, trigger="cron", hour=h1, minute=m1)
         sch.add_job(open_grp, trigger="cron", hour=h2, minute=m2)
